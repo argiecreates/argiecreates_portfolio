@@ -947,10 +947,12 @@ function initTour(){
   const btn=$('#tourBtn'),ico=btn.querySelector('i'),label=btn.querySelector('span');
   let active=false,runId=0,touring=false;
   const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-  const animTo=(y,ms=900)=>new Promise(resolve=>{
+  const animTo=y=>new Promise(resolve=>{
     y=clamp(y,0,document.documentElement.scrollHeight-innerHeight);
-    const from=scrollY,dist=y-from,t0=performance.now(),id=runId;
+    const from=scrollY,dist=y-from;
     if(Math.abs(dist)<2)return resolve();
+    const ms=clamp(Math.abs(dist)/.4,900,6000); // ~normal swipe speed, slower for long distances
+    const t0=performance.now(),id=runId;
     const step=now=>{
       if(!active||id!==runId)return resolve();
       const k=Math.min(1,(now-t0)/ms),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
@@ -977,29 +979,29 @@ function initTour(){
     touring=true;const id=++runId;setUI(true);
     const ok=()=>active&&id===runId;
     const done=()=>{if(id===runId){touring=false;setUI(false)}};
-    await animTo(0,700);if(!ok())return done();
-    await sleep(1200);if(!ok())return done();
+    await animTo(0);if(!ok())return done();
+    await sleep(1400);if(!ok())return done();
     const about=$('#about');
-    await animTo(about.getBoundingClientRect().top+scrollY-30,1400);if(!ok())return done();
-    await sleep(2600);if(!ok())return done();
-    await animTo(pinY(skillPin,0),1100);if(!ok())return done();
-    await sleep(500);
+    await animTo(about.getBoundingClientRect().top+scrollY-30);if(!ok())return done();
+    await sleep(3000);if(!ok())return done();
+    await animTo(pinY(skillPin,0));if(!ok())return done();
+    await sleep(900);
     for(let i=0;i<skillPin.n;i++){
       if(!ok())return done();
-      await animTo(pinY(skillPin,i),700);
-      await sleep(1500);
+      await animTo(pinY(skillPin,i));
+      await sleep(1900);
     }
     if(!ok())return done();
-    await animTo(pinY(projPin,0),1100);
+    await animTo(pinY(projPin,0));
     for(let i=0;i<projPin.n;i++){
       if(!ok())return done();
-      await animTo(pinY(projPin,i),700);
-      await sleep(1800);
+      await animTo(pinY(projPin,i));
+      await sleep(2200);
     }
     if(!ok())return done();
     const contact=$('#contact');
-    await animTo(contact.getBoundingClientRect().top+scrollY-40,1200);
-    await sleep(1200);if(!ok())return done();
+    await animTo(contact.getBoundingClientRect().top+scrollY-40);
+    await sleep(1400);if(!ok())return done();
     done();
   }
   btn.addEventListener('click',e=>{
