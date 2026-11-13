@@ -72,6 +72,10 @@ html.edges.scrolled .edged::before,html.edges.scrolled .edged::after{display:blo
 .sound-btn{position:fixed;left:20px;bottom:max(20px,env(safe-area-inset-bottom));z-index:1000;width:42px;height:42px;border:1px solid var(--silver-d);background:rgba(9,11,16,.7);color:var(--silver);cursor:pointer;display:none;align-items:center;justify-content:center;transition:.3s}
 .sound-btn.show{display:flex}
 .sound-btn:hover{background:var(--silver);color:var(--bg)}
+.tour-btn{position:fixed;right:20px;bottom:max(20px,env(safe-area-inset-bottom));z-index:1000;height:36px;padding:0 14px;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--silver-d);background:rgba(9,11,16,.7);color:var(--silver);cursor:pointer;font-family:var(--display);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;backdrop-filter:blur(6px);transition:.3s}
+.tour-btn:hover{background:var(--silver);color:var(--bg)}
+.tour-btn.running{border-color:var(--gold);color:var(--gold)}
+.tour-btn i{font-size:.65rem}
 
 /* shared */
 .section{position:relative;padding:130px 28px;max-width:1300px;margin:0 auto}
@@ -348,6 +352,7 @@ html.lite .vignette{display:none}
 </div>
 
 <button class="sound-btn" id="soundBtn" aria-label="Toggle sound"><i class="fas fa-volume-high"></i></button>
+<button class="tour-btn" id="tourBtn" aria-label="Start auto tour"><i class="fas fa-play"></i><span>Tour</span></button>
 
 <main>
 <!-- HERO -->
@@ -937,6 +942,74 @@ function initSound(){
   };
 }
 
+/* ============ AUTO TOUR: smooth scroll showcase ============ */
+function initTour(){
+  const btn=$('#tourBtn'),ico=btn.querySelector('i'),label=btn.querySelector('span');
+  let active=false,runId=0,touring=false;
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  const animTo=(y,ms=900)=>new Promise(resolve=>{
+    y=clamp(y,0,document.documentElement.scrollHeight-innerHeight);
+    const from=scrollY,dist=y-from,t0=performance.now(),id=runId;
+    if(Math.abs(dist)<2)return resolve();
+    const step=now=>{
+      if(!active||id!==runId)return resolve();
+      const k=Math.min(1,(now-t0)/ms),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
+      scrollTo(0,from+dist*e);
+      k<1?requestAnimationFrame(step):resolve();
+    };
+    requestAnimationFrame(step);
+  });
+  const pinY=(pin,i)=>{
+    const top=pin.section.getBoundingClientRect().top+scrollY;
+    const total=pin.section.offsetHeight-innerHeight*(pin.ov?2.4:1);
+    return top+(pin.n>1?i/(pin.n-1):0)*total+1;
+  };
+  const setUI=on=>{
+    active=on;
+    ico.className='fas '+(on?'fa-stop':'fa-play');
+    label.textContent=on?'Stop':'Tour';
+    btn.classList.toggle('running',on);
+    btn.setAttribute('aria-label',on?'Stop auto tour':'Start auto tour');
+  };
+  const stop=()=>{runId++;touring=false;setUI(false)};
+  async function tour(){
+    if(touring)return;
+    touring=true;const id=++runId;setUI(true);
+    const ok=()=>active&&id===runId;
+    const done=()=>{if(id===runId){touring=false;setUI(false)}};
+    await animTo(0,700);if(!ok())return done();
+    await sleep(1200);if(!ok())return done();
+    const about=$('#about');
+    await animTo(about.getBoundingClientRect().top+scrollY-30,1400);if(!ok())return done();
+    await sleep(2600);if(!ok())return done();
+    await animTo(pinY(skillPin,0),1100);if(!ok())return done();
+    await sleep(500);
+    for(let i=0;i<skillPin.n;i++){
+      if(!ok())return done();
+      await animTo(pinY(skillPin,i),700);
+      await sleep(1500);
+    }
+    if(!ok())return done();
+    await animTo(pinY(projPin,0),1100);
+    for(let i=0;i<projPin.n;i++){
+      if(!ok())return done();
+      await animTo(pinY(projPin,i),700);
+      await sleep(1800);
+    }
+    if(!ok())return done();
+    const contact=$('#contact');
+    await animTo(contact.getBoundingClientRect().top+scrollY-40,1200);
+    await sleep(1200);if(!ok())return done();
+    done();
+  }
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(active)stop();else tour();
+  });
+  const cancel=e=>{if(active&&!(e.target&&e.target.closest&&e.target.closest('#tourBtn')))stop()};
+  ['wheel','touchstart','keydown'].forEach(n=>addEventListener(n,cancel,{passive:true}));
+}
+
 /* ============ INIT ============ */
 document.addEventListener('DOMContentLoaded',()=>{
   $('#current-year').textContent=new Date().getFullYear();
@@ -947,7 +1020,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     t.innerHTML=g.repeat(3);
   });
 
-  initDust();initBlob();initSound();
+  initDust();initBlob();initSound();initTour();
   buildSkills();buildProjects('all');
   collect();
   fitAbout();addEventListener('resize',fitAbout);addEventListener('load',fitAbout);
