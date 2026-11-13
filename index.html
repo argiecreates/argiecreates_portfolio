@@ -68,6 +68,11 @@ html.edges.scrolled .edged::before,html.edges.scrolled .edged::after{display:blo
 .side-dots a{width:9px;height:9px;transform:rotate(45deg);border:1px solid var(--silver-d);transition:.4s var(--ease)}
 .side-dots a.active{background:var(--gold);border-color:var(--gold);transform:rotate(45deg) scale(1.5)}
 
+/* sound toggle */
+.sound-btn{position:fixed;left:20px;bottom:max(20px,env(safe-area-inset-bottom));z-index:1000;width:42px;height:42px;border:1px solid var(--silver-d);background:rgba(9,11,16,.7);color:var(--silver);cursor:pointer;display:none;align-items:center;justify-content:center;transition:.3s}
+.sound-btn.show{display:flex}
+.sound-btn:hover{background:var(--silver);color:var(--bg)}
+
 /* shared */
 .section{position:relative;padding:130px 28px;max-width:1300px;margin:0 auto}
 .eyebrow{font-family:var(--display);font-size:.78rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);display:inline-block}
@@ -341,6 +346,8 @@ html.lite .vignette{display:none}
 <div class="side-dots" aria-hidden="true">
   <a href="#home" class="active"></a><a href="#about"></a><a href="#skills"></a><a href="#portfolio"></a><a href="#contact"></a>
 </div>
+
+<button class="sound-btn" id="soundBtn" aria-label="Toggle sound"><i class="fas fa-volume-high"></i></button>
 
 <main>
 <!-- HERO -->
@@ -854,6 +861,7 @@ function frame(){
     });
   }
 
+  soundCheck();
   pins.forEach(pinUpdate);
 
   // active nav
@@ -888,6 +896,49 @@ function initSmooth(){
   addEventListener('scroll',()=>{if(!anim)target=cur=scrollY},{passive:true});
 }
 
+/* ============ SOUND: plays when the About section arrives ============ */
+const SOUND_SRC='sound.mp3',SOUND_VOL=.6;   // put your downloaded track next to index.html as sound.mp3
+let soundCheck=()=>{};
+function initSound(){
+  const a=new Audio(SOUND_SRC),btn=$('#soundBtn'),ico=btn.querySelector('i');
+  a.preload='auto';a.volume=0;
+  let on=true,armed=false,played=false,unlocked=false,fade;
+  const fadeTo=(v,ms=1200)=>{
+    clearInterval(fade);const from=a.volume,t0=performance.now();
+    fade=setInterval(()=>{
+      const k=Math.min(1,(performance.now()-t0)/ms);
+      a.volume=Math.max(0,Math.min(1,from+(v-from)*k));
+      if(k>=1){clearInterval(fade);if(v===0)a.pause()}
+    },40);
+  };
+  const paint=()=>{ico.className='fas '+(on&&!a.paused||on&&!played?'fa-volume-high':'fa-volume-xmark')};
+  const start=()=>{
+    if(played||!on)return;
+    a.currentTime=0;
+    a.play().then(()=>{played=true;fadeTo(SOUND_VOL);paint()}).catch(()=>{});
+  };
+  const evs=['pointerdown','touchend','keydown','click'];
+  const unlock=e=>{
+    if(e.target&&e.target.closest&&e.target.closest('#soundBtn'))return;
+    unlocked=true;evs.forEach(n=>removeEventListener(n,unlock));
+    if(armed)start();
+  };
+  evs.forEach(n=>addEventListener(n,unlock,{passive:true}));
+  btn.addEventListener('click',()=>{
+    if(!played){on=true;start();return}
+    on=!on;
+    if(on){a.play().catch(()=>{});fadeTo(SOUND_VOL,600)}else fadeTo(0,500);
+    ico.className='fas '+(on?'fa-volume-high':'fa-volume-xmark');
+  });
+  soundCheck=()=>{
+    if(armed)return;
+    if($('#about').getBoundingClientRect().top<innerHeight*.5){
+      armed=true;btn.classList.add('show');
+      if(unlocked)start();
+    }
+  };
+}
+
 /* ============ INIT ============ */
 document.addEventListener('DOMContentLoaded',()=>{
   $('#current-year').textContent=new Date().getFullYear();
@@ -898,7 +949,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     t.innerHTML=g.repeat(3);
   });
 
-  initDust();initBlob();
+  initDust();initBlob();initSound();
   buildSkills();buildProjects('all');
   collect();
   fitAbout();addEventListener('resize',fitAbout);addEventListener('load',fitAbout);
