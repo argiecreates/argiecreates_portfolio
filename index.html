@@ -896,13 +896,13 @@ function initSmooth(){
   addEventListener('scroll',()=>{if(!anim)target=cur=scrollY},{passive:true});
 }
 
-/* ============ SOUND: plays when the About section arrives ============ */
+/* ============ SOUND: starts playing on first scroll down ============ */
 const SOUND_SRC='backgroundmusic/backgroundmusic.mp3',SOUND_VOL=.6;
 let soundCheck=()=>{};
 function initSound(){
   const a=new Audio(SOUND_SRC),btn=$('#soundBtn'),ico=btn.querySelector('i');
   a.preload='auto';a.loop=true;a.volume=0;
-  let on=true,armed=false,played=false,fade;
+  let on=true,armed=false,played=false,trying=false,fade;
   const fadeTo=(v,ms=1200)=>{
     clearInterval(fade);const from=a.volume,t0=performance.now();
     fade=setInterval(()=>{
@@ -913,8 +913,9 @@ function initSound(){
   };
   const paint=()=>{ico.className='fas '+(on?'fa-volume-high':'fa-volume-xmark')};
   const start=()=>{
-    if(played||!on)return;
-    a.play().then(()=>{played=true;fadeTo(SOUND_VOL);paint()}).catch(()=>{});
+    if(played||!on||trying)return;
+    trying=true;
+    a.play().then(()=>{trying=false;played=true;fadeTo(SOUND_VOL);paint()}).catch(()=>{trying=false});
   };
   const evs=['pointerdown','touchend','keydown','click','wheel','touchmove','scroll'];
   const unlock=e=>{
@@ -929,8 +930,7 @@ function initSound(){
     paint();
   });
   soundCheck=()=>{
-    if(armed)return;
-    if($('#about').getBoundingClientRect().top<innerHeight*.5){
+    if(scrollY>10&&!armed){
       armed=true;btn.classList.add('show');
       start();
     }
