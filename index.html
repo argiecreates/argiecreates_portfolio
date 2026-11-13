@@ -46,7 +46,7 @@ main,.footer{position:relative;z-index:2}
 #contactLayer{--sbg:#17120a;--glow:radial-gradient(ellipse 60% 45% at 50% 85%,rgba(201,169,106,.2),transparent 70%)}
 @media(min-width:993px){main .hero-pin{height:290vh}#aboutLayer{margin-top:-100vh}}
 .edged::before,.edged::after{content:'';position:absolute;left:50%;width:100vw;margin-left:-50vw;height:220px;pointer-events:none;display:none;
-  -webkit-mask-image:var(--edge);mask-image:var(--edge);-webkit-mask-size:1200px 1808px;mask-size:1200px 1808px;
+  -webkit-mask-image:var(--edge);mask-image:var(--edge);-webkit-mask-size:1200px calc(var(--en,8)*226px);mask-size:1200px calc(var(--en,8)*226px);
   -webkit-mask-repeat:repeat-x;mask-repeat:repeat-x;-webkit-mask-position:var(--mx,0px) var(--my,-6px);mask-position:var(--mx,0px) var(--my,-6px)}
 .edged::before{top:-225px;background:#e4e9f1;opacity:.9}
 .edged::after{top:-219px;background-color:var(--sbg,var(--bg))}
@@ -698,7 +698,7 @@ function initBlob(){
 let lastSy=0,fi=0,ft=0,dctx,dw,dh,debrisOn=false,edgeEls=[];const parts=[];
 function makeEdge(){
   // organic ink-splash edge: wavy body + tendrils + flying droplets + small holes, 8 looping frames
-  const W=1200,H=220,N=8,P=6,S=H+P,TAU=6.2832,R=Math.random,c=document.createElement('canvas');c.width=W;c.height=S*N;
+  const W=1200,H=220,N=lite?1:8,P=6,S=H+P,TAU=6.2832,R=Math.random,c=document.createElement('canvas');c.width=W;c.height=S*N;
   const x=c.getContext('2d');
   const waves=[[1,.07,1],[2,.05,-1],[3,.04,2],[5,.03,1],[8,.02,-2],[13,.014,2],[21,.01,-3],[34,.007,3],[55,.005,-2]]
     .map(([k,a,m])=>({k,a:a*H,m,ph:R()*TAU}));
@@ -720,13 +720,14 @@ function makeEdge(){
     x.globalCompositeOperation='destination-out';
     for(let i=0;i<30;i++){const px=R()*W,r=.8+R()*3,y=edge(px,f)+4+R()*R()*H*.22;x.beginPath();x.arc(px,oy+y,r,0,TAU);x.fill()}
   }
+  document.documentElement.style.setProperty('--en',N);
   document.documentElement.style.setProperty('--edge',`url(${c.toDataURL()})`);
   document.documentElement.classList.add('edges');
 }
 function fitAbout(){const l=$('#aboutLayer');l.style.top=Math.min(0,innerHeight-$('#about').offsetHeight)+'px'}
 function initEdges(){
   makeEdge();edgeEls=$$('.edged');
-  dctx=$('#debris').getContext('2d');debrisSize();addEventListener('resize',debrisSize);
+  if(!lite){dctx=$('#debris').getContext('2d');debrisSize();addEventListener('resize',debrisSize)}
 }
 function debrisSize(){const c=$('#debris');dw=c.width=innerWidth;dh=c.height=innerHeight}
 function spawnDebris(n,dir,y0){
@@ -791,16 +792,16 @@ function frame(){
   });
 
   // crumbly edge: slides with scroll, throws debris where a section is eating the previous one
-  if(!reduce&&!lite){
+  if(!reduce){
     const dy=sy-lastSy;lastSy=sy;
     const root=document.documentElement;
     if(dy){
       root.classList.add('scrolled');
       root.style.setProperty('--mx',((sy*.35)%1200).toFixed(1)+'px');
       const now=performance.now();
-      if(now-ft>70){ft=now;fi=(fi+1)%8;root.style.setProperty('--my',(-(fi*226+6))+'px')} // crumbs flicker while scrolling
+      if(!lite&&now-ft>70){ft=now;fi=(fi+1)%8;root.style.setProperty('--my',(-(fi*226+6))+'px')} // crumbs flicker while scrolling
     }
-    if(dy)edgeEls.forEach(el=>{
+    if(dy&&!lite)edgeEls.forEach(el=>{
       const t=el.getBoundingClientRect().top;
       if(t>-40&&t<vh)spawnDebris(Math.min(6,Math.ceil(Math.abs(dy)/14)),Math.sign(dy),t);
     });
@@ -854,7 +855,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   buildSkills();buildProjects('all');
   collect();
   fitAbout();addEventListener('resize',fitAbout);addEventListener('load',fitAbout);
-  if(!reduce&&!lite)initEdges();
+  if(!reduce)initEdges();
 
   // nav + dots smooth scroll
   $$('.nav-link,.side-dots a,.hero-btns a').forEach(a=>a.addEventListener('click',e=>{
