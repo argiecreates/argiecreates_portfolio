@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 <title>Argie Anecito | SEO Expert & Web Developer Portfolio</title>
 <meta name="description" content="Explore Argie Anecito's portfolio: SEO expert and Web developer creating user-friendly websites and impactful web solutions.">
 <meta name="keywords" content="SEO, Web developer, Argie Anecito, web solutions, UI/UX, web development">
@@ -29,6 +29,7 @@ button{font-family:inherit}
 .vignette{position:fixed;inset:0;z-index:4;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.65) 100%)}
 .scroll-progress{position:fixed;top:0;left:0;height:2px;width:100%;background:linear-gradient(90deg,var(--gold),var(--silver));transform:scaleX(0);transform-origin:0 50%;z-index:1100}
 main,.footer{position:relative;z-index:2}
+main,.footer{overflow-x:clip}
 
 .debris{position:fixed;inset:0;width:100%;height:100%;z-index:5;pointer-events:none}
 
@@ -264,6 +265,41 @@ html.lite .vignette{display:none}
   .slide:not(.is-active) [data-side="l"]{translate:-40vw 0}.slide:not(.is-active) [data-side="r"]{translate:40vw 0}
   .chip{padding:5px 12px;font-size:.58rem;letter-spacing:.16em}.pj-filter{gap:6px;top:200px}
   .embed-modal{padding:0}.embed-device{display:none}
+}
+/* mobile layout fixes */
+@media(max-width:992px){
+  .scroll-cue{display:none}
+  .hero{padding:104px 22px 200px}
+  .hero-content{gap:30px}
+  .arch{width:min(280px,68vw)}
+  .stage{height:100vh;height:100svh}
+  .stage-title{top:70px}
+  .stage-title .sec-title{font-size:1.25rem}
+  .stage-ui{bottom:max(26px,env(safe-area-inset-bottom))}
+  .slide{padding:128px 22px 90px}
+  .slide-in{gap:20px}
+  .sk-name{font-size:clamp(2rem,9vw,3rem);margin:8px 0 16px}
+  #projectStage .slide{padding:200px 22px 90px}
+  .pj-filter{top:122px;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;justify-content:safe center;padding:0 16px;gap:8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .pj-filter::-webkit-scrollbar{display:none}
+  .chip{flex:none;white-space:nowrap}
+  .pj-frame{aspect-ratio:16/10;max-height:25svh;width:100%}
+  .pj-frame::before{inset:-8px}
+  .pj-title{font-size:clamp(1.3rem,6vw,1.8rem);margin:6px 0 10px}
+  .pj-desc{font-size:1rem;line-height:1.5;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .pj-tags{gap:6px;margin-bottom:14px}
+  .pj-tags span{padding:2px 10px;font-size:.55rem}
+  .pj-actions{gap:10px}
+  .pj-actions .btn{padding:9px 18px;font-size:.64rem;letter-spacing:.2em}
+}
+@media(max-width:768px){
+  body{font-size:1.05rem}
+  .hero-desc{font-size:1.1rem;margin-bottom:28px}
+  .hero-hello{font-size:1.2rem}
+  .hero-sub{font-size:.8rem;letter-spacing:.3em}
+  .about-text .lead{font-size:1.3rem}
+  .c-item p{font-size:1.1rem}
+  .sec-head{margin-bottom:50px}
 }
 @media(prefers-reduced-motion:reduce){
   .slide [data-side]{transition:none}.band-track{margin-left:0}
@@ -502,6 +538,7 @@ const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
 const pad=n=>String(n).padStart(2,'0');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const lite=matchMedia('(pointer:coarse)').matches||innerWidth<993;
+const FX=lite?50:180;
 document.documentElement.classList.toggle('lite',lite);
 
 /* ============ PINNED ONE-BY-ONE STAGES ============ */
@@ -767,7 +804,7 @@ function frame(){
     if(reduce){el.style.opacity=1;return}
     const r=el.getBoundingClientRect();
     const p=clamp((vh*.95-r.top)/(vh*.42)),e=1-Math.pow(1-p,3),t=el.dataset.fx;
-    const x=t==='l'?-(1-e)*180:t==='r'?(1-e)*180:0,y=t==='u'?(1-e)*60:0;
+    const x=t==='l'?-(1-e)*FX:t==='r'?(1-e)*FX:0,y=t==='u'?(1-e)*60:0;
     el.style.translate=`${x.toFixed(1)}px ${y.toFixed(1)}px`;el.style.opacity=e.toFixed(3);
   });
 
