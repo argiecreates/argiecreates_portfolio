@@ -897,12 +897,12 @@ function initSmooth(){
 }
 
 /* ============ SOUND: plays when the About section arrives ============ */
-const SOUND_SRC='sound.mp3',SOUND_VOL=.6;   // put your downloaded track next to index.html as sound.mp3
+const SOUND_SRC='backgroundmusic/backgroundmusic.mp3',SOUND_VOL=.6;
 let soundCheck=()=>{};
 function initSound(){
   const a=new Audio(SOUND_SRC),btn=$('#soundBtn'),ico=btn.querySelector('i');
-  a.preload='auto';a.volume=0;
-  let on=true,armed=false,played=false,unlocked=false,fade;
+  a.preload='auto';a.loop=true;a.volume=0;
+  let on=true,armed=false,played=false,fade;
   const fadeTo=(v,ms=1200)=>{
     clearInterval(fade);const from=a.volume,t0=performance.now();
     fade=setInterval(()=>{
@@ -911,16 +911,14 @@ function initSound(){
       if(k>=1){clearInterval(fade);if(v===0)a.pause()}
     },40);
   };
-  const paint=()=>{ico.className='fas '+(on&&!a.paused||on&&!played?'fa-volume-high':'fa-volume-xmark')};
+  const paint=()=>{ico.className='fas '+(on?'fa-volume-high':'fa-volume-xmark')};
   const start=()=>{
     if(played||!on)return;
-    a.currentTime=0;
     a.play().then(()=>{played=true;fadeTo(SOUND_VOL);paint()}).catch(()=>{});
   };
-  const evs=['pointerdown','touchend','keydown','click'];
+  const evs=['pointerdown','touchend','keydown','click','wheel','touchmove','scroll'];
   const unlock=e=>{
     if(e.target&&e.target.closest&&e.target.closest('#soundBtn'))return;
-    unlocked=true;evs.forEach(n=>removeEventListener(n,unlock));
     if(armed)start();
   };
   evs.forEach(n=>addEventListener(n,unlock,{passive:true}));
@@ -928,13 +926,13 @@ function initSound(){
     if(!played){on=true;start();return}
     on=!on;
     if(on){a.play().catch(()=>{});fadeTo(SOUND_VOL,600)}else fadeTo(0,500);
-    ico.className='fas '+(on?'fa-volume-high':'fa-volume-xmark');
+    paint();
   });
   soundCheck=()=>{
     if(armed)return;
     if($('#about').getBoundingClientRect().top<innerHeight*.5){
       armed=true;btn.classList.add('show');
-      if(unlocked)start();
+      start();
     }
   };
 }
