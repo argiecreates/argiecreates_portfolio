@@ -269,9 +269,12 @@ html.lite .vignette{display:none}
 /* mobile layout fixes */
 @media(max-width:992px){
   .scroll-cue{display:none}
-  .hero{padding:104px 22px 200px}
-  .hero-content{gap:30px}
-  .arch{width:min(280px,68vw)}
+  /* hero pinned on mobile too, so the About layer erases it like on desktop */
+  .hero-pin{height:250vh}
+  .hero{position:sticky;top:0;height:100vh;height:100svh;min-height:0;padding:84px 22px 40px}
+  #aboutLayer{margin-top:-100vh}
+  .hero-content{gap:20px}
+  .arch{width:min(240px,58vw,max(130px,calc((100svh - 470px)*.75)))}
   .stage{height:100vh;height:100svh}
   .stage-title{top:70px}
   .stage-title .sec-title{font-size:1.25rem}
@@ -294,9 +297,11 @@ html.lite .vignette{display:none}
 }
 @media(max-width:768px){
   body{font-size:1.05rem}
-  .hero-desc{font-size:1.1rem;margin-bottom:28px}
-  .hero-hello{font-size:1.2rem}
-  .hero-sub{font-size:.8rem;letter-spacing:.3em}
+  .hero-name{font-size:2.4rem;margin:4px 0 10px}
+  .hero-desc{font-size:.98rem;line-height:1.5;margin-bottom:20px}
+  .hero-hello{font-size:1.1rem}
+  .hero-sub{font-size:.75rem;letter-spacing:.3em;margin-bottom:14px}
+  .hero-btns .btn{padding:10px 22px;font-size:.68rem}
   .about-text .lead{font-size:1.3rem}
   .c-item p{font-size:1.1rem}
   .sec-head{margin-bottom:50px}
@@ -810,7 +815,7 @@ function frame(){
 
   // hero text exits to the sides as you scroll away
   if(!reduce&&sy<vh*2){
-    const desktop=innerWidth>992,p=desktop?clamp((sy-vh*.3)/(vh*.55)):0;
+    const p=clamp((sy-vh*.3)/(vh*.55));
     hxEls.forEach(({el,d})=>{el.style.translate=`${(d*p*240).toFixed(1)}px 0`;el.style.opacity=(1-p).toFixed(3)});
   }
 
