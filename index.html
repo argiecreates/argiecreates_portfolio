@@ -1,2150 +1,901 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Argie Anecito | SEO Expert & Web Developer Portfolio</title>
-    <meta name="description"
-    content="Explore Argie Anecito's portfolio: SEO expert and Web developer creating user-friendly websites and impactful web solutions.">
-  <meta name="keywords" content="SEO, Web developer, Argie Anecito, web solutions, UI/UX, web development">
-  <meta name="author" content="Argie Anecito">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argie Anecito | SEO Expert & Web Developer Portfolio</title>
+<meta name="description" content="Explore Argie Anecito's portfolio: SEO expert and Web developer creating user-friendly websites and impactful web solutions.">
+<meta name="keywords" content="SEO, Web developer, Argie Anecito, web solutions, UI/UX, web development">
+<meta name="author" content="Argie Anecito">
+<link href="https://anecitoargie.github.io/Portfolio_Argie/static/media/LogoA.7bb885c8500757337169.png" rel="icon">
+<link href="https://anecitoargie.github.io/Portfolio_Argie/static/media/LogoA.7bb885c8500757337169.png" rel="apple-touch-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,500&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#090b10;--bg2:#10141d;--silver:#cfd5de;--silver-d:#8d95a3;--gold:#c9a96a;
+  --line:rgba(207,213,222,.18);--serif:'Crimson Pro',Georgia,serif;--display:'Cinzel',Georgia,serif;--title:'Playfair Display',Georgia,serif;
+  --ease:cubic-bezier(.2,.8,.2,1)
+}
+html{scroll-behavior:auto}
+body{font-family:var(--serif);font-size:1.18rem;line-height:1.7;color:var(--silver);background:var(--bg);overflow-x:clip}
+a{color:inherit;text-decoration:none}ul{list-style:none}img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--title);font-weight:700;line-height:1.15;letter-spacing:.04em}
+button{font-family:inherit}
 
-   <link href="https://anecitoargie.github.io/Portfolio_Argie/static/media/LogoA.7bb885c8500757337169.png" rel="icon">
-  <link href="https://anecitoargie.github.io/Portfolio_Argie/static/media/LogoA.7bb885c8500757337169.png"
-    rel="apple-touch-icon">
-  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+/* atmosphere */
+#dust{position:fixed;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+.vignette{position:fixed;inset:0;z-index:4;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.65) 100%)}
+.scroll-progress{position:fixed;top:0;left:0;height:2px;width:100%;background:linear-gradient(90deg,var(--gold),var(--silver));transform:scaleX(0);transform-origin:0 50%;z-index:1100}
+main,.footer{position:relative;z-index:2}
+
+.debris{position:fixed;inset:0;width:100%;height:100%;z-index:5;pointer-events:none}
+
+/* layered sections: next section slides over the previous and eats it with a crumbly edge */
+.layer{position:relative;background-color:var(--sbg,var(--bg));background-image:var(--glow,none)}
+#aboutLayer{position:sticky;min-height:100vh;padding-bottom:70vh}
+#portfolio,.band.pull{margin-top:-100vh}
+.pin.ov{--ov:140vh}
+/* each section has its own backdrop colour, so the erase reveals a new "world" */
+#aboutLayer{--sbg:#0d1322;--glow:radial-gradient(ellipse 60% 45% at 85% 80%,rgba(86,110,180,.26),transparent 70%),radial-gradient(ellipse 50% 40% at 10% 55%,rgba(201,169,106,.07),transparent 70%)}
+.band.edged:not(.pull){--sbg:#140f1b}
+#skills{--sbg:#0a1619;--glow:radial-gradient(ellipse 60% 50% at 25% 60%,rgba(60,150,160,.22),transparent 70%)}
+#portfolio{--sbg:#170d15;--glow:radial-gradient(ellipse 60% 50% at 75% 60%,rgba(170,70,100,.22),transparent 70%)}
+.band.pull{--sbg:#0e141b}
+#contactLayer{--sbg:#17120a;--glow:radial-gradient(ellipse 60% 45% at 50% 85%,rgba(201,169,106,.2),transparent 70%)}
+@media(min-width:993px){main .hero-pin{height:290vh}#aboutLayer{margin-top:-100vh}}
+.edged::before,.edged::after{content:'';position:absolute;left:50%;width:100vw;margin-left:-50vw;height:220px;pointer-events:none;display:none;
+  -webkit-mask-image:var(--edge);mask-image:var(--edge);-webkit-mask-size:1200px 1808px;mask-size:1200px 1808px;
+  -webkit-mask-repeat:repeat-x;mask-repeat:repeat-x;-webkit-mask-position:var(--mx,0px) var(--my,-6px);mask-position:var(--mx,0px) var(--my,-6px)}
+.edged::before{top:-225px;background:#e4e9f1;opacity:.9}
+.edged::after{top:-219px;background-color:var(--sbg,var(--bg))}
+html.edges.scrolled .edged::before,html.edges.scrolled .edged::after{display:block}
+
+/* nav */
+.navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:22px 0;background:linear-gradient(180deg,rgba(9,11,16,.9),transparent)}
+.nav-container{max-width:1300px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--display);font-weight:800;font-size:1.5rem;letter-spacing:.3em;color:#fff}
+.logo-dot{color:var(--gold)}
+.nav-menu{display:flex;gap:38px}
+.nav-link{font-family:var(--display);font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:var(--silver-d);position:relative;padding:6px 0;transition:color .3s}
+.nav-link::after{content:'';position:absolute;left:50%;bottom:-2px;width:0;height:1px;background:var(--gold);transition:.4s var(--ease);transform:translateX(-50%)}
+.nav-link:hover,.nav-link.active{color:#fff}
+.nav-link.active::after,.nav-link:hover::after{width:100%}
+.menu-toggle{display:none;background:none;border:0;color:var(--silver);font-size:1.4rem;cursor:pointer}
+.side-dots{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:1000;display:flex;flex-direction:column;gap:18px}
+.side-dots a{width:9px;height:9px;transform:rotate(45deg);border:1px solid var(--silver-d);transition:.4s var(--ease)}
+.side-dots a.active{background:var(--gold);border-color:var(--gold);transform:rotate(45deg) scale(1.5)}
+
+/* shared */
+.section{position:relative;padding:130px 28px;max-width:1300px;margin:0 auto}
+.eyebrow{font-family:var(--display);font-size:.78rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);display:inline-block}
+.sec-head{text-align:center;margin-bottom:80px;position:relative}
+.sec-title{font-size:clamp(2.2rem,5vw,3.6rem);text-transform:uppercase;background:linear-gradient(180deg,#fff,var(--silver-d));-webkit-background-clip:text;background-clip:text;color:transparent;position:relative}
+.orn{display:flex;align-items:center;justify-content:center;gap:14px;margin:18px auto 0;color:var(--gold);font-size:.7rem}
+.orn::before,.orn::after{content:'';width:90px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.orn::after{transform:scaleX(-1)}
+.ghost{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:-1;font-family:var(--title);font-weight:900;font-size:clamp(5rem,18vw,15rem);line-height:1;text-transform:uppercase;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(207,213,222,.1);pointer-events:none;user-select:none}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 34px;font-family:var(--display);font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:var(--silver);background:transparent;border:1px solid var(--silver-d);cursor:pointer;position:relative;transition:.4s var(--ease)}
+.btn::before{content:'';position:absolute;inset:4px;border:1px solid var(--line);transition:.4s var(--ease)}
+.btn:hover{background:var(--silver);color:var(--bg);border-color:var(--silver)}
+.btn:hover::before{border-color:rgba(9,11,16,.3)}
+.btn.gold{border-color:var(--gold);color:var(--gold)}
+.btn.gold:hover{background:var(--gold);color:var(--bg)}
+[data-fx]{will-change:translate,opacity}
+
+/* hero */
+.hero-pin{position:relative;height:190vh;background:var(--bg)}
+.hero{position:sticky;top:0;height:100vh;display:flex;align-items:center;padding:120px 28px 70px;overflow:hidden}
+.hero-layers{position:absolute;inset:0;pointer-events:none;z-index:0}
+.fog{position:absolute;border-radius:50%;filter:blur(40px)}
+.fog.a{width:60vw;height:60vw;left:-15vw;top:-10vw;background:radial-gradient(circle,rgba(70,90,140,.35),transparent 65%)}
+.fog.b{width:55vw;height:55vw;right:-12vw;bottom:-14vw;background:radial-gradient(circle,rgba(201,169,106,.2),transparent 65%)}
+.h-ghost{position:absolute;left:50%;bottom:-2%;transform:translateX(-50%);font-family:var(--title);font-weight:900;font-size:clamp(7rem,26vw,24rem);line-height:.8;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(207,213,222,.09)}
+.hero-content{position:relative;z-index:2;max-width:1300px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-hello{font-family:var(--title);font-style:italic;font-size:1.5rem;color:var(--silver-d)}
+.hero-name{font-size:clamp(2.8rem,7vw,5.6rem);text-transform:uppercase;background:linear-gradient(180deg,#fff 20%,var(--silver-d));-webkit-background-clip:text;background-clip:text;color:transparent;margin:6px 0 14px}
+.hero-sub{font-family:var(--display);font-size:1rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.hero-desc{max-width:560px;font-size:1.3rem;color:var(--silver-d);margin-bottom:38px}
+.hero-btns{display:flex;gap:18px;flex-wrap:wrap}
+.hero-art{display:flex;justify-content:center}
+/* ink-splash oblong profile */
+.arch{position:relative;width:min(520px,84vw,calc((100vh - 170px)*.75));aspect-ratio:3/4;--pp:0%}
+.arch .ph,.arch .ring{position:absolute;inset:0;width:100%;height:100%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-size:100% 800%;mask-size:100% 800%;
+  -webkit-mask-position:0 var(--pp);mask-position:0 var(--pp)}
+.arch .ph{object-fit:cover;filter:grayscale(.25) contrast(1.05);
+  -webkit-mask-image:var(--blobfill);mask-image:var(--blobfill)}
+.arch .ring{background:linear-gradient(180deg,#f2f5fa,#aab2bf);
+  -webkit-mask-image:var(--blobring);mask-image:var(--blobring);
+  filter:drop-shadow(0 0 10px rgba(207,213,222,.25))}
+.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;text-align:center;font-family:var(--display);font-size:.66rem;letter-spacing:.4em;text-transform:uppercase;color:var(--silver-d)}
+.scroll-cue span{display:block;width:1px;height:46px;margin:10px auto 0;background:linear-gradient(var(--gold),transparent);animation:cue 2s infinite var(--ease)}
+@keyframes cue{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.5);opacity:.4}}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:70px;align-items:start}
+.about-text p{color:var(--silver-d);margin-bottom:26px}
+.about-text .lead{font-size:1.6rem;color:var(--silver);font-style:italic;line-height:1.5}
+.detail{display:flex;align-items:center;gap:20px;padding:18px 22px;border:1px solid var(--line);background:linear-gradient(90deg,rgba(207,213,222,.05),transparent);margin-bottom:16px;position:relative}
+.detail::before{content:'';position:absolute;left:-1px;top:20%;height:60%;width:2px;background:var(--gold)}
+.detail i{color:var(--gold);font-size:1.1rem;width:24px;text-align:center}
+.detail h4{font-family:var(--display);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--silver-d);font-weight:400}
+.detail p{color:#fff;font-size:1.15rem;line-height:1.3;word-break:break-word}
+
+/* scrolling band */
+.band{overflow-x:clip;background-color:var(--sbg,var(--bg));padding:26px 0;pointer-events:none;position:relative;z-index:2}
+.band-track{display:flex;gap:2.5rem;width:max-content;margin-left:-100vw;align-items:center;font-family:var(--title);font-weight:900;font-size:clamp(2.4rem,7vw,5.5rem);text-transform:uppercase;white-space:nowrap;line-height:1;will-change:translate}
+.bw{color:transparent;-webkit-text-stroke:1px rgba(207,213,222,.35)}
+.bw.alt{-webkit-text-stroke:0;background:linear-gradient(90deg,var(--gold),var(--silver));-webkit-background-clip:text;background-clip:text}
+.bd{color:var(--gold);font-size:.4em}
+
+/* pinned one-by-one stages */
+.pin{position:relative;background-color:var(--sbg,var(--bg));height:calc(100vh + (var(--n,1) - 1) * var(--step,75vh) + var(--ov,0px))}
+#skills{--step:100vh}
+#portfolio{--step:115vh}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background-image:var(--glow,none)}
+.stage-title{position:absolute;top:84px;left:0;width:100%;text-align:center;z-index:5}
+.stage-title .sec-title{font-size:clamp(1.4rem,3vw,2.2rem)}
+/* slides now dissolve (fade + blur) as well as slide sideways */
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:150px 28px 90px;visibility:hidden;pointer-events:none;opacity:0;filter:blur(14px);
+  transition:visibility 0s .5s,opacity .5s ease,filter .5s ease}
+.slide.is-active{visibility:visible;pointer-events:auto;opacity:1;filter:none;transition:visibility 0s,opacity .8s ease .2s,filter .8s ease .2s}
+.slide.is-active [data-side]{transition-delay:.15s}
+.slide [data-side]{transition:translate .95s var(--ease),opacity .75s ease}
+.slide:not(.is-active) [data-side="l"]{translate:-22vw 0;opacity:0}
+.slide:not(.is-active) [data-side="r"]{translate:22vw 0;opacity:0}
+.slide-in{position:relative;width:100%;max-width:1200px;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.slide.rev .slide-a{order:2}
+.slide-no{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:-1;font-family:var(--title);font-weight:900;font-size:clamp(9rem,30vw,26rem);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(207,213,222,.07);pointer-events:none}
+.stage-ui{position:absolute;left:0;bottom:30px;width:100%;display:flex;flex-direction:column;align-items:center;gap:14px;z-index:6;pointer-events:none}
+.counter{font-family:var(--display);letter-spacing:.35em;font-size:.85rem;color:var(--silver-d)}
+.counter b{color:var(--gold);font-weight:600}
+.bar{width:min(280px,60vw);height:1px;background:var(--line);position:relative}
+.bar i{position:absolute;left:0;top:0;height:100%;width:100%;background:var(--gold);transform:scaleX(0);transform-origin:0 50%}
+.ticks{position:absolute;left:28px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:6}
+.ticks button{width:16px;height:2px;border:0;background:var(--silver-d);opacity:.4;cursor:pointer;transition:.4s var(--ease);padding:0}
+.ticks button.on{width:34px;background:var(--gold);opacity:1}
+
+/* skills slide */
+.sk-name{font-size:clamp(2.4rem,6vw,5rem);text-transform:uppercase;background:linear-gradient(180deg,#fff 20%,var(--silver-d));-webkit-background-clip:text;background-clip:text;color:transparent;margin:10px 0 22px}
+.sk-rule{display:block;width:90px;height:1px;background:var(--gold)}
+.sk-text .note{margin-top:20px;font-style:italic;color:var(--silver-d)}
+.sk-icon{display:flex;justify-content:center}
+.medal{width:min(300px,62vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#d9dee6 60%,#aab2bf);display:flex;align-items:center;justify-content:center;padding:21%;position:relative;box-shadow:0 0 80px rgba(207,213,222,.15),inset 0 0 30px rgba(0,0,0,.2)}
+.medal::before,.medal::after{content:'';position:absolute;border-radius:50%;border:1px solid var(--silver-d)}
+.medal::before{inset:-14px}
+.medal::after{inset:-30px;border-color:var(--line);border-style:dashed}
+.medal img{width:100%;height:100%;object-fit:contain}
+
+/* project slide */
+.pj-filter{position:absolute;top:212px;left:0;width:100%;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;z-index:7;padding:0 20px}
+.chip{padding:7px 18px;border:1px solid var(--line);background:rgba(9,11,16,.6);color:var(--silver-d);font-family:var(--display);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;transition:.3s}
+.chip:hover,.chip.active{border-color:var(--gold);color:var(--gold)}
+#projectStage .slide{padding-top:280px}
+.pj-media{position:relative}
+.pj-frame{position:relative;aspect-ratio:16/11;background-size:cover;background-position:center top;border:1px solid var(--silver-d);cursor:pointer;overflow:hidden}
+.pj-frame::before{content:'';position:absolute;inset:-12px;border:1px solid var(--line);pointer-events:none}
+.pj-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(9,11,16,.7))}
+.pj-frame.embed-bg{background:linear-gradient(135deg,#1c2a4a,#0b0d12);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:2rem;color:var(--gold);text-align:center;padding:20px}
+.pj-badge{position:absolute;top:14px;right:14px;z-index:2;background:rgba(9,11,16,.75);border:1px solid var(--line);padding:4px 12px;font-family:var(--display);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase}
+.pj-title{font-size:clamp(1.8rem,3.6vw,3rem);text-transform:uppercase;color:#fff;margin:10px 0 18px}
+.pj-desc{color:var(--silver-d);margin-bottom:22px;max-width:520px}
+.pj-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.pj-tags span{border:1px solid var(--line);padding:3px 14px;font-family:var(--display);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--silver-d)}
+.pj-actions{display:flex;gap:14px;flex-wrap:wrap}
+.pj-actions .btn{padding:11px 26px}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.c-item{display:flex;gap:22px;align-items:center;margin-bottom:34px}
+.c-ico{width:58px;height:58px;transform:rotate(45deg);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.c-ico i{transform:rotate(-45deg);color:var(--gold)}
+.c-item h4{font-family:var(--display);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--silver-d);font-weight:400}
+.c-item p{color:#fff;font-size:1.25rem;line-height:1.3;word-break:break-word}
+.c-card{padding:50px;border:1px solid var(--silver-d);position:relative;background:linear-gradient(160deg,rgba(207,213,222,.06),transparent)}
+.c-card::before{content:'';position:absolute;inset:8px;border:1px solid var(--line);pointer-events:none}
+.c-card h3{font-size:1.7rem;text-transform:uppercase;color:#fff;margin-bottom:16px}
+.c-card p{color:var(--silver-d);margin-bottom:28px}
+.footer{padding:60px 20px;text-align:center;border-top:1px solid var(--line);background:rgba(0,0,0,.4)}
+.footer .logo{justify-content:center;display:flex;margin-bottom:14px}
+.footer p{color:var(--silver-d);font-size:1rem}
+
+/* lightbox + embed */
+.lightbox,.embed-modal{position:fixed;inset:0;z-index:2000;background:rgba(5,6,9,.94);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.35s}
+.lightbox.active,.embed-modal.active{opacity:1;visibility:visible}
+.lb-box{position:relative;width:92%;max-width:1200px;height:88vh;display:flex;border:1px solid var(--silver-d);background:var(--bg2)}
+.lb-img{flex:1;display:flex;align-items:center;justify-content:center;padding:40px;min-width:0}
+.lb-img img{max-height:100%;object-fit:contain;transition:opacity .2s ease}
+.lb-info{width:300px;padding:40px;border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+.lb-info h3{font-size:1.5rem;color:#fff;margin-bottom:14px;text-transform:uppercase}
+.lb-info p{color:var(--silver-d);margin-bottom:24px}
+.round{position:absolute;z-index:5;width:44px;height:44px;border:1px solid var(--silver-d);background:rgba(9,11,16,.8);color:var(--silver);cursor:pointer;font-size:1.3rem;display:flex;align-items:center;justify-content:center;transition:.3s}
+.round:hover{background:var(--silver);color:var(--bg)}
+.lb-close{top:14px;right:14px}.lb-prev{left:14px;top:50%;margin-top:-22px}.lb-next{left:calc(100% - 300px - 58px);top:50%;margin-top:-22px}
+.embed-modal{padding:24px}
+.embed-window{width:min(1280px,100%);height:100%;display:flex;flex-direction:column;background:var(--bg2);border:1px solid var(--silver-d)}
+.embed-bar{display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid var(--line)}
+.embed-url{flex:1;min-width:0;padding:6px 16px;border:1px solid var(--line);font-size:.95rem;color:var(--silver-d);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.embed-actions{display:flex;gap:8px}
+.embed-actions button,.embed-actions a{width:36px;height:36px;border:1px solid var(--line);background:transparent;color:var(--silver);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s}
+.embed-actions button:hover,.embed-actions a:hover,.embed-device.active{background:var(--silver);color:var(--bg)}
+.embed-stage{position:relative;flex:1;min-height:0;display:flex;justify-content:center;background:#000}
+.embed-frame-wrap{width:100%;height:100%;transition:width .35s}
+.embed-frame-wrap.mobile{width:390px;max-width:100%}
+#embedFrame{width:100%;height:100%;border:0;background:#fff}
+.embed-loader{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:var(--bg2);transition:.3s}
+.embed-loader.hidden{opacity:0;visibility:hidden}
+.spin{width:40px;height:40px;border:3px solid var(--line);border-top-color:var(--gold);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.embed-fallback{padding:8px;text-align:center;font-size:.95rem;color:var(--silver-d);border-top:1px solid var(--line)}
+.embed-fallback a{color:var(--gold);text-decoration:underline}
+
+/* responsive */
+@media(max-width:992px){
+  .hero-pin{height:auto}.hero{position:relative;height:auto;min-height:100vh}
+  .hero-content,.about-grid,.contact-grid{grid-template-columns:1fr;text-align:center;gap:44px}
+  .hero-desc{margin-inline:auto}.hero-btns{justify-content:center}
+  .hero-art{order:-1}.arch{width:min(340px,80vw)}
+  .detail{text-align:left}.c-item{text-align:left}
+  .slide-in{grid-template-columns:1fr;gap:26px;text-align:center}
+  .slide.rev .slide-a{order:0}
+  .slide{padding-top:130px}#projectStage .slide{padding-top:290px}
+  .sk-rule{margin-inline:auto}.pj-desc{margin-inline:auto}.pj-tags,.pj-actions{justify-content:center}
+  .medal{width:min(190px,46vw)}
+  .pj-frame{aspect-ratio:16/9;max-height:34vh}
+  .side-dots,.ticks{display:none}
+  .lb-box{flex-direction:column;height:auto;max-height:92vh}.lb-img{height:55vh;padding:20px}.lb-info{width:100%;border-left:0;border-top:1px solid var(--line);padding:20px}
+  .lb-next{left:auto;right:14px}
+}
+@media(max-width:768px){
+  .nav-menu{position:fixed;top:72px;left:0;width:100%;flex-direction:column;align-items:center;gap:22px;padding:30px 0;background:rgba(9,11,16,.97);border-bottom:1px solid var(--line);transform:translateY(-130%);transition:.4s var(--ease)}
+  .nav-menu.active{transform:none}.menu-toggle{display:block}
+  .section{padding:90px 20px}.c-card{padding:32px 24px}
+  .slide:not(.is-active) [data-side="l"]{translate:-40vw 0}.slide:not(.is-active) [data-side="r"]{translate:40vw 0}
+  .chip{padding:5px 12px;font-size:.58rem;letter-spacing:.16em}.pj-filter{gap:6px;top:200px}
+  .embed-modal{padding:0}.embed-device{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .slide [data-side]{transition:none}.band-track{margin-left:0}
+  .slide{filter:none!important;transition:none}
+  .debris{display:none}
+  .edged::before,.edged::after{display:none!important}
+}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <span class="logo-text">ARGIE</span>
-                <span class="logo-dot">.</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="nav-controls">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                    <i class="fas fa-sun"></i>
-                    <span class="theme-toggle-slider"></span>
-                </button>
-                <button class="menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
+<canvas id="dust" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+<canvas id="debris" class="debris" aria-hidden="true"></canvas>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    <span class="title-line">Hello, I'm</span>
-                    <span class="title-name">Argie Anecito</span>
-                </h1>
-                <h2 class="hero-subtitle">
-                    <span class="subtitle-text">Graphic Designer</span>
-                    <span class="subtitle-underline"></span>
-                </h2>
-                <p class="hero-description">
-                    On-Page SEO & Web Developer specializing in crafting intuitive digital experiences that look amazing and work hard online.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#portfolio" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="image-container">
-                    <img src="https://argieseowebsolutions.neocities.org/assets/img/profilecoding.gif" alt="Argie Anecito" class="profile-image">
-                    <div class="image-frame"></div>
-                    <div class="image-glow"></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 3D Background -->
-        <div id="three-container"></div>
-        
-        <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
-            <span class="scroll-text">Scroll Down</span>
-            <div class="scroll-line"></div>
-        </div>
-    </section>
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo"><span>ARGIE</span><span class="logo-dot">.</span></div>
+    <ul class="nav-menu">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#skills" class="nav-link">Skills</a></li>
+      <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+<div class="side-dots" aria-hidden="true">
+  <a href="#home" class="active"></a><a href="#about"></a><a href="#skills"></a><a href="#portfolio"></a><a href="#contact"></a>
+</div>
 
-    <!-- About Section -->
-    <section id="about" class="section about-section">
-        <div class="section-header">
-            <h2 class="section-title">About Me</h2>
-            <div class="section-line"></div>
-        </div>
-        <div class="about-content">
-            <div class="about-text">
-                <p class="about-intro">
-                    Hey there! Welcome to my portfolio! I'm Argie Anecito, your go-to person for all things web development and SEO, with a special knack for crafting exceptional user interfaces and experiences.
-                </p>
-                <p>
-                    I absolutely love blending innovative ideas with practical, functional solutions, always prioritizing what makes a website truly great for its users. My journey has been fueled by constant curiosity and a commitment to excellence, and I've had the pleasure of collaborating with diverse clients across various industries, sharpening my skills and expanding my expertise along the way.
-                </p>
-                <p>
-                    So, when you dive into my portfolio, you're going to see exactly how I bring web development to life. We're talking everything from sleek UI designs to powerful web applications, and guess what? I make sure to integrate effective SEO optimization into every single one. My passion is all about crafting intuitive digital experiences that don't just look amazing, but actually work hard online to connect with your audience.
-                </p>
-                <p class="about-outro">
-                    Thanks for dropping by; I'm genuinely super excited about the possibility of collaborating with you on your next project!
-                </p>
-            </div>
-            <div class="about-details">
-                <div class="detail-card">
-                    <div class="detail-icon">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="detail-content">
-                        <h3>Age</h3>
-                        <p>25</p>
-                    </div>
-                </div>
-                <div class="detail-card">
-                    <div class="detail-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="detail-content">
-                        <h3>Address</h3>
-                        <p>San Jacinto, Pangasinan, Philippines</p>
-                    </div>
-                </div>
-                <div class="detail-card">
-                    <div class="detail-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="detail-content">
-                        <h3>Degree</h3>
-                        <p>BS in Information Technology</p>
-                    </div>
-                </div>
-                <div class="detail-card">
-                    <div class="detail-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="detail-content">
-                        <h3>Email</h3>
-                        <p>argie.anecitomih@gmail.com</p>
-                    </div>
-                </div>
-                <div class="detail-card">
-                    <div class="detail-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <div class="detail-content">
-                        <h3>Expertise</h3>
-                        <p>SEO & Web Development</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section skills-section">
-        <div class="section-header">
-            <h2 class="section-title">My Skills</h2>
-            <div class="section-line"></div>
-        </div>
-        <div class="skills-container">
-            <!-- Skills will be populated by JavaScript -->
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="section portfolio-section">
-        <div class="section-header">
-            <h2 class="section-title">My Portfolio</h2>
-            <div class="section-line"></div>
-            <div class="portfolio-filter">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="shopify">Shopify</button>
-                <button class="filter-btn" data-filter="graphics">Graphics</button>
-                <button class="filter-btn" data-filter="web">Web</button>
-            </div>
-        </div>
-        <div class="portfolio-container">
-            <!-- Portfolio items will be populated by JavaScript -->
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section contact-section">
-        <div class="section-header">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="section-line"></div>
-        </div>
-        <div class="contact-content">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h3>Email</h3>
-                        <p>argie.anecitomih@gmail.com</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h3>Location</h3>
-                        <p>San Jacinto, Pangasinan, Philippines</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h3>Services</h3>
-                        <p>Web Development, SEO, UI/UX Design</p>
-                    </div>
-                </div>
-            </div>
-            <div class="contact-message">
-                <h3>Let's Work Together!</h3>
-                <p>I'm currently available for freelance work and exciting projects. If you have a website that needs building or improving, let's connect!</p>
-                <a href="mailto:argie.anecitomih@gmail.com" class="btn btn-primary">Send Me an Email</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="logo">
-                <span class="logo-text">ARGIE</span>
-                <span class="logo-dot">.</span>
-            </div>
-            <p class="footer-text">© <span id="current-year">2024</span> Argie Anecito. All Rights Reserved.</p>
-            
-        </div>
-    </footer>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
-        <div class="lightbox-content">
-            <button class="lightbox-close">&times;</button>
-            <button class="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
-            <div class="lightbox-image-container">
-                <img id="lightbox-image" src="" alt="">
-                <div class="lightbox-info">
-                    <h3 id="lightbox-title"></h3>
-                    <p id="lightbox-description"></p>
-                    <a id="lightbox-link" href="#" target="_blank" class="btn btn-primary">Visit Website</a>
-                </div>
-            </div>
-            <button class="lightbox-next"><i class="fas fa-chevron-right"></i></button>
-        </div>
+<main>
+<!-- HERO -->
+<div class="hero-pin">
+<section id="home" class="hero">
+  <div class="hero-layers" aria-hidden="true">
+    <span class="fog a" data-speed="0.25"></span>
+    <span class="fog b" data-speed="-0.2"></span>
+    <span class="h-ghost" data-speed="0.12">Argie</span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-text" data-hx="-1">
+      <p class="hero-hello">Hello, I'm</p>
+      <h1 class="hero-name">Argie Anecito</h1>
+      <h2 class="hero-sub">Graphic Designer</h2>
+      <p class="hero-desc">On-Page SEO & Web Developer specializing in crafting intuitive digital experiences that look amazing and work hard online.</p>
+      <div class="hero-btns">
+        <a href="#portfolio" class="btn gold">View My Work</a>
+        <a href="#contact" class="btn">Get In Touch</a>
+      </div>
     </div>
-
-    <script>
-        // Data for skills with custom icons
-        const skillsData = [
-            { 
-                name: "Ahrefs", 
-                icon: "https://th.bing.com/th/id/ODLS.7dfe86f6-e566-40c5-ae89-4a806289584c?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2",
-                category: "seo" 
-            },
-            { 
-                name: "Schema Markup", 
-                icon: "https://app.schemaapp.com/assets/img/SA_Logo_Main_Orange.svg",
-                category: "seo" 
-            },
-            { 
-                name: "Menterprise", 
-                icon: "https://cdn.prod.website-files.com/6642c1627c905dd1bde41d10/6699b1ce40b5b435be486fc0_square_256.png",
-                category: "seo" 
-            },
-            { 
-                name: "HTML5", 
-                icon: "https://cdn.worldvectorlogo.com/logos/html-1.svg",
-                category: "dev" 
-            },
-            { 
-                name: "CSS3", 
-                icon: "https://cdn.worldvectorlogo.com/logos/css-3.svg",
-                category: "dev" 
-            },
-            { 
-                name: "React JS", 
-                icon: "https://cdn.worldvectorlogo.com/logos/react-2.svg",
-                category: "dev" 
-            },
-            { 
-                name: "JavaScript", 
-                icon: "https://www.svgrepo.com/show/303206/javascript-logo.svg",
-                category: "dev" 
-            },
-            { 
-                name: "Shopify", 
-                icon: "https://www.svgrepo.com/show/475678/shopify-color.svg",
-                category: "cms" 
-            },
-            { 
-                name: "WordPress", 
-                icon: "https://www.svgrepo.com/show/501062/wordpress.svg",
-                category: "cms" 
-            },
-            { 
-                name: "Google Search Console", 
-                icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjI4IiB2aWV3Qm94PSIwIDAgMjU2IDIyOCI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJsb2dvc0dvb2dsZVNlYXJjaENvbnNvbGUwIiBjeD0iMjEuNjYlIiBjeT0iMjguNzA4JSIgcj0iODIuODclIiBmeD0iMjEuNjYlIiBmeT0iMjguNzA4JSIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCguNTk1MDMgLjU5NDg2IC0uNDQwMzQgLjgwMzgzIC4yMTQgLS4wNzMpIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZjFmMmYyIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZTZlN2U4Ii8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PHBhdGggZmlsbD0iIzczNzM3MyIgZD0iTTE2NS45NzkgMEg5MC4wMjFMNzEuMDk3IDE5LjA1NXYxOC45MjRoMTguOTI0VjE5LjA1NWg3NS45NTh2MTguOTI0aDE4LjkyNFYxOS4wNTV6Ii8+PHBhdGggZmlsbD0iI2JmYmZiZiIgZD0iTTkwLjAyMSAwdjE5LjA1NWg3NS45NThWMHoiLz48cGF0aCBmaWxsPSJ1cmwoI2xvZ29zR29vZ2xlU2VhcmNoQ29uc29sZTApIiBkPSJNMzYuNDAyIDM3Ljk4TDAgNzQuMzgxdjEzNC4xNzdjMCAxMC41MTMgOC41NDIgMTguOTI0IDE4LjkyNCAxOC45MjRoMjE4LjE1MmMxMC41MTMgMCAxOC45MjQtOC41NDMgMTguOTI0LTE4LjkyNFY3NC41MTNMMjE5LjQ2NiAzNy45OHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjguNTE3IDEwOS4wNzZoMTk5LjA5N3YxMTguNTM4SDI4LjUxN3oiLz48cGF0aCBmaWxsPSIjZTBlMGUwIiBkPSJNMzYuNDAyIDM3Ljk3OUwwIDc0LjM4MnYzNC42OTRoMjU2Vjc0LjUxM2wtMzYuNTM0LTM2LjUzNHoiLz48cGF0aCBmaWxsPSIjZDFkMWQxIiBkPSJNNDIuNzEgMjEzLjI5SDEyOHYxNC4xOTNINDIuNzF6Ii8+PHBhdGggZmlsbD0iIzQyODVmNCIgZD0iTTI4LjUxNyA4Ni45OThhMTQuNjk1IDE0LjY5NSAwIDAgMSAxNC43Mi0xNC43MTloMTY5LjUyN2ExNC42OTUgMTQuNjk1IDAgMCAxIDE0LjcxOSAxNC43MTl2MjIuMDc4SDI4LjUxN3oiLz48cGF0aCBmaWxsPSIjZTZlNmU2IiBkPSJNNTYuOTAzIDkwLjE1MmE3LjA2NyA3LjA2NyAwIDAgMS03LjA5NiA3LjA5NmE3LjA2NyA3LjA2NyAwIDAgMS03LjA5Ny03LjA5NmE3LjA2NyA3LjA2NyAwIDAgMSA3LjA5Ny03LjA5N2E3LjA2NyA3LjA2NyAwIDAgMSA3LjA5NiA3LjA5N20yMy42NTYgMGE3LjA2NyA3LjA2NyAwIDAgMS03LjA5NyA3LjA5NmE3LjA2NyA3LjA2cyAwIDAgMSA3LjA5Ni03LjA5NmE3LjA2NyA3LjA2NyAwIDAgMSA3LjA5Ny03LjA5N2E3LjA2NyA3LjA2NyAwIDAgMSA3LjA5NyA3LjA5NyIvPjxwYXRoIGZpbGw9IiNiYWJhYmEiIGQ9Im0yMjcuNDgzIDE2NS4xOTFsLTI5LjgzMi0yOS44MzJsLTkuOTg4IDMwLjg4M2wtNDAuNzM5LTQwLjYwOGwtMS4xODMgNjIuNjg2bDE1LjExMyAyMy42NTVjMi4yMzQtLjM5NC0xMS4zMDIgMTUuNTA4LTExLjMwMiAxNS41MDhoNzcuOTN6Ii8+PHBhdGggZmlsbD0iIzRkNGQ0ZCIgZD0iTTIwOC44MjEgMTY0LjAwOGMwLTE2LjgyMS05Ljg1Ni0zMS4yNzctMjMuOTE4LTM4LjI0MnYzOS45NWwtMTguNzkyIDEwLjEybC0xOS4wNTYtMTAuMTJ2LTQwLjA4MmMtMTQuMDYxIDYuOTY2LTIzLjY1NSAyMS41NTMtMjMuNjU1IDM4LjI0M2MwIDE2LjgyMSA5LjcyNSAzMS4yNzcgMjMuNzg3IDM4LjI0MnYyNS4zNjRoMzcuODQ4di0yNS4zNjRjMTMuOTMtNi44MzQgMjMuNzg2LTIxLjQyIDIzLjc4Ni0zOC4xMSIvPjxwYXRoIGZpbGw9IiNkMWQxZDEiIGQ9Ik00Mi43MSAxMjMuMjY5aDY2LjM2NnY3NS44MjhINDIuNzF6Ii8+PC9zdmc+",
-                category: "seo" 
-            },
-            { 
-                name: "PHP", 
-                icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHBhdGggZmlsbD0idXJsKCNkZXZpY29uUGhwMCkiIGQ9Ik0wIDY0YzAgMTguNTkzIDI4LjY1NCAzMy42NjcgNjQgMzMuNjY3UzEyOCA4Mi41OTMgMTI4IDY0Uzk5LjM0NSAzMC4zMzMgNjQgMzAuMzMzUzAgNDUuNDA3IDAgNjQiLz48cGF0aCBmaWxsPSIjNzc3YmIzIiBkPSJNNjQgOTUuMTY3YzMzLjk2NSAwIDYxLjUtMTMuOTU1IDYxLjUtMzEuMTY3YzAtMTcuMjE0LTI3LjUzNS0zMS4xNjctNjEuNS0zMS4xNjdTMi41IDQ2Ljc4NiAyLjUgNjRjMCAxNy4yMTIgMjcuNTM1IDMxLjE2NyA2MS41IDMxLjE2NyIvPjxwYXRoIGQ9Ik0zNC43NzIgNjcuODY0YzIuNzkzIDAgNC44NzctLjUxNSA2LjE5Ni0xLjUzYzEuMzA2LTEuMDA2IDIuMjA3LTIuNzQ3IDIuNjgtNS4xNzVjLjQ0LTIuMjcuMjcyLTMuODU0LS41LTQuNzFjLS43ODgtLjg3NC0yLjQ5My0xLjMxNy01LjA2Ny0xLjMxN2gtNC40NjRsLTIuNDczIDEyLjczMnpNMjAuMTczIDgzLjU0N2EuNjk0LjY5NCAwIDAgMS0uNjgtLjgyOGw2LjU1Ny0zMy43MzhhLjY5NS42OTUgMCAwIDEgLjY4LS41NjFoMTQuMTM0YzQuNDQyIDAgNy43NDggMS4yMDYgOS44MjcgMy41ODVjMi4wODggMi4zOSAyLjczNCA1LjczNCAxLjkxNyA5LjkzNWMtLjMzMyAxLjcxMS0uOTA1IDMuMy0xLjcgNC43MjRhMTUuOCAxNS44IDAgMCAxLTMuMTI4IDMuOTJjLTEuNTMxIDEuNDMyLTMuMjY0IDIuNDcyLTUuMTQ3IDMuMDgzYy0xLjg1Mi42MDQtNC4yMzIuOTEtNy4wNy45MWgtNS43MjRsLTEuNjM0IDguNDA4YS42OTUuNjk1IDAgMCAxLS42ODIuNTYyeiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zNC4xOSA1NS44MjZoMy44OTFjMy4xMDcgMCA0LjE4Ni42ODIgNC41NTMgMS4wODljLjYwNy42NzQuNzIzIDIuMDk3LjMzMSA0LjExMmMtLjQzOSAyLjI1Ny0xLjI1MyAzLjg1OC0yLjQyIDQuNzU2Yy0xLjE5NC45Mi0zLjEzOCAxLjM4Ni01Ljc3MyAxLjM4NmgtMi43ODZ6bTYuNjc0LTguMUgyNi43MzFhMS4zOSAxLjM5IDAgMCAwLTEuMzY0IDEuMTIzTDE4LjgxIDgyLjU4OGExLjM5IDEuMzkgMCAwIDAgMS4zNjMgMS42NTNoNy4zNWExLjM5IDEuMzkgMCAwIDAgMS4zNjMtMS4xMjRsMS41MjUtNy44NDZoNS4xNTFjMi45MTIgMCA1LjM2NC0uMzE4IDcuMjg3LS45NDRjMS45NzctLjY0MiAzLjc5Ni0xLjczMSA1LjQwNi0zLjIzN2ExNi41IDE2LjUgMCAwIDAgMy4yNTktNC4wODdjLjgzMS0xLjQ4NyAxLjQyOS0zLjE0NyAxLjc3NS00LjkzMWMuODYtNC40MjMuMTYxLTcuOTY0LTIuMDc2LTEwLjUyNGMtMi4yMTYtMi41MzctNS42OTgtMy44MjMtMTAuMzQ5LTMuODIzek0zMC4zMDEgNjguNTU3aDQuNDcxcTQuNDQ1LjAwMSA2LjYyLTEuNjc1cTIuMTc1LTEuNjc0IDIuOTM4LTUuNTkxcS43MjgtMy43NjItLjY2NS01LjMwOHEtMS4zOTUtMS41NDYtNS41ODQtMS41NDZoLTUuMDM2bC0yLjc0MyAxNC4xMm0xMC41NjMtMTkuNDQ1cTYuMzc4IDAgOS4zMDMgMy4zNDh0MS43NiA5LjM0NnEtLjQ4MiAyLjQ3Mi0xLjYyNSA0LjUxOHEtMS4xNDUgMi4wNDgtMi45OTEgMy43NDdxLTIuMiAyLjA2LTQuODkyIDIuOTM1cS0yLjY5MS44NzYtNi44NTcuODc1aC02LjI5NmwtMS43NDMgOC45N2gtNy4zNWw2LjU1OC0zMy43Mzl6Ii8+PHBhdGggZD0iTTY5LjQ1OSA3NC41NzdhLjY5NC42OTQgMCAwIDEtLjY4Mi0uODI3bDIuOS0xNC45MjhjLjI3Ny0xLjQyLjIwOS0yLjQzOC0uMTktMi44N2MtLjI0NS0uMjYzLS45NzktLjcwNC0zLjE1LS43MDRoLTUuMjU2bC0zLjY0NiAxOC43NjhhLjY5NS42OTUgMCAwIDEtLjY4My41NmgtNy4yOWEuNjk1LjY5NSAwIDAgMS0uNjgzLS44MjZsNi41NTgtMzMuNzM5YS42OTUuNjk1IDAgMCAxIC42ODItLjU2MWg3LjI5YS42OTUuNjk1IDAgMCAxIC42ODMuODI2TDY0LjQxIDQ4LjQyaDUuNjUzYzQuMzA3IDAgNy4yMjcuNzU4IDguOTI4IDIuMzIxYzEuNzMzIDEuNTkzIDIuMjc1IDQuMTQgMS42MDggNy41NzNsLTMuMDUxIDE1LjcwMmEuNjk1LjY5NSAwIDAgMS0uNjgyLjU2eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik02NS4zMSAzOC43NTVoLTcuMjkxYTEuMzkgMS4zOSAwIDAgMC0xLjM2NCAxLjEyNGwtNi41NTcgMzMuNzM4YTEuMzkgMS4zOSAwIDAgMCAxLjM2MyAxLjY1NGg3LjI5MWExLjM5IDEuMzkgMCAwIDAgMS4zNjQtMS4xMjRsMy41MzctMTguMjA1aDQuNjgyYzIuMTY4IDAgMi42MjQuNDYzIDIuNjQxLjQ4NGMuMTMyLjE0LjMwNS43OTUuMDE5IDIuMjY0bC0yLjkgMTQuOTI3YTEuMzkgMS4zOSAwIDAgMCAxLjM2NCAxLjY1NGg3LjQwOGExLjM5IDEuMzkgMCAwIDAgMS4zNjMtMS4xMjRsMy4wNTEtMTUuN2MuNzE1LTMuNjg2LjEwMy02LjQ1LTEuODItOC4yMTdjLTEuODM2LTEuNjg2LTQuOTEtMi41MDUtOS4zOTgtMi41MDVoLTQuODFsMS40MjEtNy4zMTVhMS4zOSAxLjM5IDAgMCAwLTEuMzY0LTEuNjU1bTAgMS4zOWwtMS43NDMgOC45NjhoNi40OTZxNi4xMzEgMCA4LjQ1NyAyLjE0cTIuMzI4IDIuMTM4IDEuMzk4IDYuOTNsLTMuMDUyIDE1LjY5OWgtNy40MDdsMi45MDEtMTQuOTI4cS40OTUtMi41NDctLjM2NS0zLjQ3NHEtLjg2LS45MjYtMy42NTgtLjkyNmgtNS44MjlsLTMuNzU2IDE5LjMyN0g1MS40Nmw2LjU1OC0zMy43MzloNy4yOTJ6Ii8+PHBhdGggZD0iTTkyLjEzNiA2Ny44NjRjMi43OTMgMCA0Ljg3OC0uNTE1IDYuMTk4LTEuNTNjMS4zMDQtMS4wMDYgMi4yMDYtMi43NDcgMi42NzktNS4xNzVjLjQ0LTIuMjcuMjczLTMuODU0LS41LTQuNzFjLS43ODgtLjg3NC0yLjQ5My0xLjMxNy01LjA2Ny0xLjMxN2gtNC40NjNsLTIuNDc1IDEyLjczMnpNNzcuNTQgODMuNTQ3YS42OTQuNjk0IDAgMCAxLS42ODItLjgyOGw2LjU1Ny0zMy43MzhhLjY5NS42OTUgMCAwIDEgLjY4Mi0uNTYxSDk4LjIzYzQuNDQyIDAgNy43NDggMS4yMDYgOS44MjYgMy41ODVjMi4wODkgMi4zOSAyLjczNCA1LjczNCAxLjkxNyA5LjkzNWExNS45IDE1LjkgMCAwIDEtMS42OTkgNC43MjRhMTUuOCAxNS44IDAgMCAxLTMuMTI4IDMuOTJjLTEuNTMgMS40MzItMy4yNjUgMi40NzItNS4xNDcgMy4wODNjLTEuODUyLjYwNC00LjIzMi45MS03LjA3MS45MWgtNS43MjNsLTEuNjMzIDguNDA4YS42OTUuNjk1IDAgMCAxLS42ODMuNTYyeiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik05MS41NTUgNTUuODI2aDMuODkxYzMuMTA3IDAgNC4xODYuNjgyIDQuNTUyIDEuMDg5Yy42MS42NzQuNzI0IDIuMDk3LjMzMyA0LjExMmMtLjQ0IDIuMjU3LTEuMjU0IDMuODU4LTIuNDIxIDQuNzU2Yy0xLjE5NS45Mi0zLjEzOSAxLjM4Ni01Ljc3MyAxLjM4NmgtMi43ODZ6bTYuNjc0LTguMUg4NC4wOTZhMS4zOSAxLjM5IDAgMCAwLTEuMzYzIDEuMTIzbC02LjU1OCAzMy43MzlhMS4zOSAxLjM5IDAgMCAwIDEuMzY0IDEuNjUzaDcuMzVhMS4zOSAxLjM5IDAgMCAwIDEuMzYzLTEuMTI0bDEuNTI1LTcuODQ2aDUuMTVjMi45MTEgMCA1LjM2NC0uMzE4IDcuMjg2LS45NDRjMS45NzgtLjY0MiAzLjc5Ny0xLjczMSA1LjQwOC0zLjIzOGExNi41IDE2LjUgMCAwIDAgMy4yNTgtNC4wODZjLjgzMi0xLjQ4NyAxLjQyOC0zLjE0NyAxLjc3NS00LjkzMWMuODYtNC40MjMuMTYyLTcuOTY0LTIuMDc2LTEwLjUyNGMtMi4yMTYtMi41MzctNS42OTctMy44MjMtMTAuMzUtMy44MjN6TTg3LjY2NiA2OC41NTdoNC40N3E0LjQ0NS4wMDEgNi42MjItMS42NzVxMi4xNzUtMS42NzQgMi45MzYtNS41OTFxLjczMS0zLjc2Mi0uNjY1LTUuMzA4dC01LjU4My0xLjU0NmgtNS4wMzVabTEwLjU2My0xOS40NDVxNi4zNzggMCA5LjMwMyAzLjM0OHQxLjc1OSA5LjM0NnEtLjQ4IDIuNDcyLTEuNjI0IDQuNTE4cS0xLjE0NCAyLjA0OC0yLjk5MiAzLjc0N3EtMi4yIDIuMDYtNC44OTIgMi45MzVxLTIuNjkuODc2LTYuODU2Ljg3NWgtNi4yOTVsLTEuNzQ1IDguOTdoLTcuMzVsNi41NTgtMzMuNzM5aDE0LjEzMyIvPjxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iZGV2aWNvblBocDAiIGN4PSIwIiBjeT0iMCIgcj0iMSIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgzOC40MjYgNDIuMTY5KXNjYWxlKDg0LjA0MTM2KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiNhZWIyZDUiLz48c3RvcCBvZmZzZXQ9Ii4zIiBzdG9wLWNvbG9yPSIjYWViMmQ1Ii8+PHN0b3Agb2Zmc2V0PSIuNzUiIHN0b3AtY29sb3I9IiM0ODRjODkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM0ODRjODkiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48L3N2Zz4=",
-                category: "dev" 
-            },
-            { 
-                name: "SQL", 
-                icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiNmZGYxZjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiBkPSJNMTIgOGEyIDIgMCAwIDEgMiAydjRhMiAyIDAgMSAxLTQgMHYtNGEyIDIgMCAwIDEgMi0ybTUgMHY4aDRtLTgtMWwxIDFNMyAxNWExIDEgMCAwIDAgMSAxaDJhMSAxIDAgMCAwIDEtMXYtMmExIDEgMCAwIDAtMS0xSDRhMSAxIDAgMCAxLTEtMVY5YTEgMSAwIDAgMSAxLTFoMmExIDEgMCAwIDEgMSAxIi8+PC9zdmc+",
-                category: "dev" 
-            },
-            { 
-                name: "Photoshop", 
-                icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PGcgZmlsbD0ibm9uZSI+PHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIGZpbGw9IiMwMDFlMzYiIHJ4PSI2MCIvPjxwYXRoIGZpbGw9IiMzMWE4ZmYiIGQ9Ik01Ny42IDE3OC4wNFY2OC4yOGMwLS43NDcuMzItMS4xNzMgMS4wNjctMS4xNzNjMS44MTMgMCAzLjUyIDAgNS45NzMtLjEwN2MyLjU2LS4xMDcgNS4yMjctLjEwNyA4LjEwNy0uMjEzYzIuODgtLjEwNyA1Ljk3My0uMTA3IDkuMjgtLjIxNGMzLjMwNi0uMTA2IDYuNTA2LS4xMDYgOS43MDYtLjEwNmM4Ljc0NyAwIDE2IDEuMDY2IDIxLjk3NCAzLjMwNkEzOC4xIDM4LjEgMCAwIDEgMTI4IDc4LjUyYTM0IDM0IDAgMCAxIDcuNzg3IDEyLjE2YzEuNiA0LjQ4IDIuNDUzIDkuMDY3IDIuNDUzIDEzLjg2N3EwIDEzLjc2LTYuNCAyMi43MmMtNC4yNjcgNS45NzMtMTAuMjQgMTAuNDUzLTE3LjE3MyAxMy4wMTNjLTcuMjU0IDIuNjY3LTE1LjI1NCAzLjYyNy0yNCAzLjYyN2MtMi41NiAwLTQuMjY3IDAtNS4zMzQtLjEwN3MtMi41Ni0uMTA3LTQuNTg2LS4xMDd2MzQuMjRjLjEwNi43NDctLjQyNyAxLjM4Ny0xLjE3NCAxLjQ5NEg1OC44OGMtLjg1MyAwLTEuMjgtLjQyNy0xLjI4LTEuMzg3bTIzLjI1My05MC4zNDd2MzUuODRjMS40OTQuMTA3IDIuODguMjE0IDQuMTYuMjE0aDUuNjU0YzQuMTYgMCA4LjMyLS42NCAxMi4yNjYtMS45MmMzLjQxNC0uOTYgNi40LTIuOTg3IDguNzQ3LTUuNjU0YzIuMjQtMi42NjYgMy4zMDctNi4yOTMgMy4zMDctMTAuOTg2YTE3LjU2IDE3LjU2IDAgMCAwLTIuNDU0LTkuNDk0Yy0xLjgxMy0yLjc3My00LjM3My00LjkwNi03LjQ2Ni02LjA4Yy0zLjk0Ny0xLjYtOC4yMTQtMi4yNC0xMi41ODctMi4xMzNjLTIuNzczIDAtNS4yMjcgMC03LjI1My4xMDdjLTIuMTM0LS4xMDctMy42MjcgMC00LjM3NC4xMDZNMjA0LjggMTE3LjAyN2MtMy4yLTEuNzA3LTYuNjEzLTIuODgtMTAuMjQtMy42MjdjLTMuOTQ3LS44NTMtNy44OTMtMS4zODctMTEuOTQ3LTEuMzg3Yy0yLjEzMy0uMTA2LTQuMzczLjIxNC02LjQuNzQ3Yy0xLjM4Ni4zMi0yLjU2IDEuMDY3LTMuMzA2IDIuMTMzYy0uNTM0Ljg1NC0uODU0IDEuOTItLjg1NCAyLjg4cy40MjcgMS45MiAxLjA2NyAyLjc3NGMuOTYgMS4xNzMgMi4yNCAyLjEzMyAzLjYyNyAyLjg4YTk4IDk4IDAgMCAwIDcuNTczIDMuNTJjNS43NiAxLjkyIDExLjMwNyA0LjU4NiAxNi40MjcgNy43ODZjMy41MiAyLjI0IDYuNCA1LjIyNyA4LjQyNiA4Ljg1NGMxLjcwNyAzLjQxMyAyLjU2IDcuMTQ2IDIuNDU0IDEwLjk4NmMuMTA2IDUuMDE0LTEuMzg3IDEwLjAyNy00LjE2IDE0LjE4N2EyNi43MyAyNi43MyAwIDAgMS0xMS45NDcgOS40OTNjLTUuMjI3IDIuMjQtMTEuNjI3IDMuNDE0LTE5LjMwNyAzLjQxNGMtNC45MDYgMC05LjcwNi0uNDI3LTE0LjUwNi0xLjM4N2E0MyA0MyAwIDAgMS0xMC44OC0zLjQxM2MtLjc0Ny0uNDI3LTEuMjgtMS4xNzQtMS4xNzQtMi4wMjd2LTE4LjU2YzAtLjMyLjEwNy0uNzQ3LjQyNy0uOTZzLjY0LS4xMDcuOTYuMTA3YzQuMTYgMi40NTMgOC41MzMgNC4xNiAxMy4yMjcgNS4yMjZjNC4wNTMgMS4wNjcgOC4zMiAxLjYgMTIuNTg2IDEuNmM0LjA1NCAwIDYuOTM0LS41MzMgOC44NTQtMS40OTNjMS43MDYtLjc0NyAyLjg4LTIuNTYgMi44OC00LjQ4YzAtMS40OTMtLjg1NC0yLjg4LTIuNTYtNC4yNjdjLTEuNzA3LTEuMzg2LTUuMjI3LTIuOTg2LTEwLjQ1NC01LjAxM2E2NS4zIDY1LjMgMCAwIDEtMTUuMTQ2LTcuNjhhMjcuNiAyNy42IDAgMCAxLTguMTA3LTkuMDY3Yy0xLjcwNy0zLjQxMy0yLjU2LTcuMTQ2LTIuNDUzLTEwLjg4YzAtNC41ODYgMS4yOC04Ljk2IDMuNjI2LTEyLjkwNmMyLjY2Ny00LjI2NyA2LjYxNC03LjY4IDExLjItOS44MTRjNS4wMTQtMi41NiAxMS4zMDctMy43MzMgMTguODgtMy43MzNjNC4zNzQgMCA4Ljg1NC4zMiAxMy4yMjcuOTZjMy4yLjQyNyA2LjI5MyAxLjI4IDkuMTczIDIuNDUzYy40MjcuMTA3Ljg1NC41MzQgMS4wNjcuOTZjLjEwNy40MjcuMjEzLjg1NC4yMTMgMS4yOHYxNy4zODdjMCAuNDI3LS4yMTMuODUzLS41MzMgMS4wNjdjLS45Ni4yMTMtMS40OTMuMjEzLTEuOTIwIi8+PC9nPjwvc3ZnPg==",
-                category: "design" 
-            },
-            { 
-                name: "Figma", 
-                icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMzg0IiB2aWV3Qm94PSIwIDAgMjU2IDM4NCI+PHBhdGggZmlsbD0iIzBhY2Y4MyIgZD0iTTY0IDM4NGMzNS4zMjggMCA2NC0yOC42NzIgNjQtNjR2LTY0SDY0Yy0zNS4zMjggMC02NCAyOC42NzItNjQgNjRzMjguNjcyIDY0IDY0IDY0Ii8+PHBhdGggZmlsbD0iI2EyNTlmZiIgZD0iTTAgMTkyYzAtMzUuMzI4IDI4LjY3Mi02NCA2NC02NGg2NHYxMjhINjRjLTM1LjMyOCAwLTY0LTI4LjY3Mi02NC02NCIvPjxwYXRoIGZpbGw9IiNmMjRlMWUiIGQ9Ik0wIDY0QzAgMjguNjcyIDI4LjY3MiAwIDY0IDBoNjR2MTI4SDY0QzI4LjY3MiAxMjggMCA5OS4zMjggMCA2NCIvPjxwYXRoIGZpbGw9IiNmZjcyNjIiIGQ9Ik0xMjggMGg2NGMzNS4zMjggMCA2NCAyOC42NzIgNjQgNjRzLTI4LjY3MiA2NC02NCA2NGgtNjR6Ii8+PHBhdGggZmlsbD0iIzFhYmNmZSIgZD0iTTI1NiAxOTJjMCAzNS4zMjgtMjguNjcyIDY0LTY0IDY0cy02NC0yOC42NzItNjQtNjRzMjguNjcyLTY0IDY0LTY0czY0IDI4LjY3MiA2NCA2NCIvPjwvc3ZnPg==",
-                category: "design" 
-            }
-        ];
-
-        // Portfolio Data with Shopify sites and Graphics
-        const portfolioData = [
-            // Shopify Sites
-            { 
-                title: "Airwheel Philippines", 
-                category: "shopify", 
-                description: "E-commerce website for Airwheel electric vehicles in the Philippines",
-                link: "https://airwheel.ph/",
-                tags: ["Shopify", "E-commerce", "Electric Vehicles"],
-                thumbnail: "https://argieseowebsolutions.neocities.org/graphics/website/airwheel.png"
-            },
-            { 
-                title: "Coalax Philippines", 
-                category: "shopify", 
-                description: "Coalax brand e-commerce website for Travel Bags products",
-                link: "https://coalax.ph/",
-                tags: ["Shopify", "E-commerce", "Health & Wellness"],
-                thumbnail: "https://argieseowebsolutions.neocities.org/graphics/website/coalax.png"
-            },
-            { 
-                title: "Alpha Lifestyle", 
-                category: "shopify", 
-                description: "Premium lifestyle brand e-commerce store with diverse product range",
-                link: "https://www.alphalifestyle.ph/",
-                tags: ["Shopify", "E-commerce", "Lifestyle Brand"],
-                thumbnail: "https://argieseowebsolutions.neocities.org/graphics/website/alphalifestyle.png"
-            },
-            
-            // Graphics - Brochures
-            { 
-                title: "Coalax Brochure", 
-                category: "graphics", 
-                description: "Front and back design for Coalax brand brochure",
-                images: [
-                    "https://argieseowebsolutions.neocities.org/graphics/1%20Front.png",
-                    "https://argieseowebsolutions.neocities.org/graphics/2%20Back.png"
-                ],
-                tags: ["Brochure", "Print Design", "Brand Identity"]
-            },
-            { 
-                title: "Alpha Lifestyle Brochure", 
-                category: "graphics", 
-                description: "Front and back design for Alpha Lifestyle brand brochure",
-                images: [
-                    "https://argieseowebsolutions.neocities.org/graphics/alpha%20front.png",
-                    "https://argieseowebsolutions.neocities.org/graphics/alpha%20back.png"
-                ],
-                tags: ["Brochure", "Print Design", "Brand Identity"]
-            },
-            
-            // Graphics - Business Card
-            { 
-                title: "Alpha Lifestyle Business Card", 
-                category: "graphics", 
-                description: "Professional business card design with mockup presentation",
-                images: [
-                    "https://argieseowebsolutions.neocities.org/graphics/Alpha%20LifeStyle%20Business%20Card%20Final%20Mockup.jpg"
-                ],
-                tags: ["Business Card", "Print Design", "Mockup"]
-            },
-            
-            // Graphics - Klaviyo
-            { 
-                title: "Klaviyo Design", 
-                category: "graphics", 
-                description: "Email marketing design for Klaviyo platform",
-                images: [
-                    "https://argieseowebsolutions.neocities.org/graphics/klaviyo.jpg"
-                ],
-                tags: ["Email Design", "Marketing", "Klaviyo"]
-            },
-            
-            // Graphics - Vouchers
-            { 
-                title: "Voucher Designs", 
-                category: "graphics", 
-                description: "Front and back designs for promotional vouchers",
-                images: [
-                    "https://argieseowebsolutions.neocities.org/graphics/vouchers/Back.jpg",
-                    "https://argieseowebsolutions.neocities.org/graphics/vouchers/FRONT%2010%20_-2.jpg"
-                ],
-                tags: ["Voucher", "Promotional", "Print Design"]
-            },
-            
-            // Graphics - Social Media Posting
-            { 
-                title: "Social Media Posts", 
-                category: "graphics", 
-                description: "Various social media posting designs for multiple brands",
-                images: [
-                    "https://argieseowebsolutions.neocities.org/graphics/posting/hypershell%20posting.png",
-                    "https://argieseowebsolutions.neocities.org/graphics/posting/Posting%20(2).png",
-                    "https://argieseowebsolutions.neocities.org/graphics/posting/Posting%20Coalax.png",
-                    "https://argieseowebsolutions.neocities.org/graphics/posting/Posting.png",
-                    "https://argieseowebsolutions.neocities.org/graphics/posting/posting2.jpg",
-                    "https://argieseowebsolutions.neocities.org/graphics/posting/posting3.jpg",
-                    "https://argieseowebsolutions.neocities.org/graphics/posting/reso1.png"
-                ],
-                tags: ["Social Media", "Digital Marketing", "Content Creation"]
-            },
-            
-            // Graphics - SE3SX Profile
-            { 
-                title: "SE3SX Company Profile", 
-                category: "graphics", 
-                description: "Company profile design for SE3SX brand",
-                images: [
-                    "https://argieseowebsolutions.neocities.org/graphics/posting/se3sx%20company%20profile.png"
-                ],
-                tags: ["Company Profile", "Brand Identity", "Corporate Design"]
-            },
-            
-            // Web Projects (Placeholder for future web projects)
-            { 
-                title: "2025 Lexus RZ SUV Landing Page", 
-                category: "web", 
-                description: "Landing page for Lexus of Edison showcasing the 2025 Lexus RZ electric SUV",
-                link: "https://www.lexusofedison.com/-2025-lexus-rz-suv-lexus-of-edison-in-nj.html",
-                tags: ["Landing Page", "SEO", "UI/UX Design"],
-                thumbnail: "https://argieseowebsolutions.neocities.org/assets/img/landing%20page%20Lexus%20of%20Edison.png"
-               },
-            { 
-                title: "OSCA Malasiqui Online Application", 
-                category: "web", 
-                description: "Online application system for the Office of the Senior Citizen Affairs in Malasiqui",
-                link: "https://www.oscamalasiquionlineapplication.site/index.php",
-                tags: ["Web Application", "Government", "Database Management"],
-                thumbnail: "https://argieseowebsolutions.neocities.org/assets/img/OSCA.png"
-               }, 
-            { 
-                title: "Crafty Management System", 
-                category: "web", 
-                description: "Web-based management system for craft businesses with inventory and order management",
-                images: [
-                    "https://argieseowebsolutions.neocities.org/assets/img/crafty.png"
-                ],
-                tags: ["Web Application", "Management System", "Inventory"],
-                thumbnail: "https://argieseowebsolutions.neocities.org/assets/img/crafty.png"
-            },
-            { 
-                title: "Crafty Mobile App", 
-                category: "web", 
-                description: "Mobile application for Crafty Management System with login, cart, checkout, and chat features",
-                images: [
-                    "https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/1.png",
-                    "https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/2.png",
-                    "https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/3.png",
-                    "https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/4.png",
-                    "https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/5.png",
-                    "https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/6.png",
-                    "https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/6-2.png",
-                    "https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/7.png"
-                ],
-                tags: ["Mobile App", "E-commerce", "React Native"],
-                thumbnail: "https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/1.png"
-            },
-            { 
-                title: "Gallery Blog Portfolio", 
-                category: "web", 
-                description: "Personal portfolio and gallery blog website design",
-                link: "https://mianicoleroldan.github.io/portfolio_mia/",
-                tags: ["Portfolio", "Gallery", "Blog"],
-                thumbnail: "https://anecitoargie.github.io/Portfolio_Argie/static/media/port1.0e1587230ffffeb8da2c.png"
-            }
-        ];
-
-        // Lightbox functionality
-        let currentGalleryIndex = 0;
-        let currentGalleryImages = [];
-        let currentGalleryTitle = '';
-        let currentGalleryDescription = '';
-        let currentGalleryLink = '';
-
-        function openLightbox(galleryIndex, galleryImages, title, description, link = '') {
-            currentGalleryIndex = galleryIndex;
-            currentGalleryImages = galleryImages;
-            currentGalleryTitle = title;
-            currentGalleryDescription = description;
-            currentGalleryLink = link;
-            
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightbox-image');
-            const lightboxTitle = document.getElementById('lightbox-title');
-            const lightboxDescription = document.getElementById('lightbox-description');
-            const lightboxLink = document.getElementById('lightbox-link');
-            
-            lightboxImage.src = galleryImages[galleryIndex];
-            lightboxTitle.textContent = title;
-            lightboxDescription.textContent = description;
-            
-            if (link) {
-                lightboxLink.href = link;
-                lightboxLink.style.display = 'inline-block';
-            } else {
-                lightboxLink.style.display = 'none';
-            }
-            
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        function nextImage() {
-            currentGalleryIndex = (currentGalleryIndex + 1) % currentGalleryImages.length;
-            document.getElementById('lightbox-image').src = currentGalleryImages[currentGalleryIndex];
-        }
-
-        function prevImage() {
-            currentGalleryIndex = (currentGalleryIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
-            document.getElementById('lightbox-image').src = currentGalleryImages[currentGalleryIndex];
-        }
-
-        // Theme management
-        const themeToggle = document.getElementById('themeToggle');
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-        
-        function initTheme() {
-            // Check for saved theme or prefered scheme
-            const savedTheme = localStorage.getItem('theme');
-            
-            if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
-                document.body.classList.add('dark-mode');
-                themeToggle.classList.add('dark');
-            } else {
-                document.body.classList.remove('dark-mode');
-                themeToggle.classList.remove('dark');
-            }
-        }
-        
-        function toggleTheme() {
-            if (document.body.classList.contains('dark-mode')) {
-                document.body.classList.remove('dark-mode');
-                themeToggle.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.body.classList.add('dark-mode');
-                themeToggle.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-        
-        // Initialize Three.js 3D background
-        function initThreeBackground() {
-            const container = document.getElementById('three-container');
-            if (!container) return;
-
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            container.appendChild(renderer.domElement);
-            
-            // Create floating geometry
-            const geometries = [];
-            const colors = [0x4361ee, 0x3a0ca3, 0x7209b7, 0xf72585, 0x4cc9f0];
-            
-            for (let i = 0; i < 20; i++) {
-                const geometryType = Math.random();
-                let geometry;
-                
-                if (geometryType < 0.3) {
-                    geometry = new THREE.IcosahedronGeometry(Math.random() * 0.5 + 0.2, 0);
-                } else if (geometryType < 0.6) {
-                    geometry = new THREE.TorusGeometry(Math.random() * 0.4 + 0.2, Math.random() * 0.1 + 0.05, 8, 12);
-                } else {
-                    geometry = new THREE.OctahedronGeometry(Math.random() * 0.5 + 0.2, 0);
-                }
-                
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                const material = new THREE.MeshPhongMaterial({ 
-                    color: color, 
-                    shininess: 100,
-                    transparent: true,
-                    opacity: 0.6
-                });
-                
-                const mesh = new THREE.Mesh(geometry, material);
-                
-                mesh.position.x = (Math.random() - 0.5) * 20;
-                mesh.position.y = (Math.random() - 0.5) * 20;
-                mesh.position.z = (Math.random() - 0.5) * 10;
-                
-                mesh.rotation.x = Math.random() * Math.PI;
-                mesh.rotation.y = Math.random() * Math.PI;
-                
-                mesh.userData = {
-                    speedX: (Math.random() - 0.5) * 0.005,
-                    speedY: (Math.random() - 0.5) * 0.005,
-                    speedZ: (Math.random() - 0.5) * 0.005,
-                    rotSpeedX: (Math.random() - 0.5) * 0.01,
-                    rotSpeedY: (Math.random() - 0.5) * 0.01
-                };
-                
-                geometries.push(mesh);
-                scene.add(mesh);
-            }
-            
-            // Add lights
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
-            
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(1, 1, 1);
-            scene.add(directionalLight);
-            
-            camera.position.z = 5;
-            
-            // Animation loop
-            function animate() {
-                requestAnimationFrame(animate);
-                
-                geometries.forEach(mesh => {
-                    mesh.position.x += mesh.userData.speedX;
-                    mesh.position.y += mesh.userData.speedY;
-                    mesh.position.z += mesh.userData.speedZ;
-                    
-                    mesh.rotation.x += mesh.userData.rotSpeedX;
-                    mesh.rotation.y += mesh.userData.rotSpeedY;
-                    
-                    // Bounce off boundaries
-                    if (mesh.position.x > 10 || mesh.position.x < -10) mesh.userData.speedX *= -1;
-                    if (mesh.position.y > 10 || mesh.position.y < -10) mesh.userData.speedY *= -1;
-                    if (mesh.position.z > 5 || mesh.position.z < -5) mesh.userData.speedZ *= -1;
-                });
-                
-                renderer.render(scene, camera);
-            }
-            
-            animate();
-            
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
-
-        // Populate skills section with custom icons
-        function populateSkills() {
-            const skillsContainer = document.querySelector('.skills-container');
-            if (!skillsContainer) return;
-            
-            skillsData.forEach(skill => {
-                const skillElement = document.createElement('div');
-                skillElement.className = 'skill-item';
-                
-                skillElement.innerHTML = `
-                    <div class="skill-logo">
-                        <img src="${skill.icon}" alt="${skill.name}" class="skill-icon-img">
-                    </div>
-                    <div class="skill-info">
-                        <h3 class="skill-name">${skill.name}</h3>
-                    </div>
-                `;
-                
-                skillsContainer.appendChild(skillElement);
-            });
-        }
-
-        // Populate portfolio section
-        function populatePortfolio() {
-            const portfolioContainer = document.querySelector('.portfolio-container');
-            if (!portfolioContainer) return;
-            
-            portfolioData.forEach((item, index) => {
-                const portfolioElement = document.createElement('div');
-                portfolioElement.className = `portfolio-item ${item.category}`;
-                portfolioElement.setAttribute('data-category', item.category);
-                
-                // Create tags HTML
-                const tagsHTML = item.tags.map(tag => `<span class="portfolio-tag">${tag}</span>`).join('');
-                
-                // Determine thumbnail
-                let thumbnail = '';
-                if (item.thumbnail) {
-                    thumbnail = item.thumbnail;
-                } else if (item.images && item.images.length > 0) {
-                    thumbnail = item.images[0];
-                } else {
-                    thumbnail = 'https://images.unsplash.com/photo-1517697471339-4aa32003c11a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
-                }
-                
-                // Create gallery indicator for multiple images
-                const galleryIndicator = item.images && item.images.length > 1 ? 
-                    `<div class="gallery-indicator">${item.images.length} images</div>` : '';
-                
-                portfolioElement.innerHTML = `
-                    <div class="portfolio-card">
-                        <div class="portfolio-image" style="background-image: url('${thumbnail}')">
-                            ${galleryIndicator}
-                            <div class="portfolio-number">0${index + 1}</div>
-                            <div class="portfolio-overlay">
-                                <h3 class="portfolio-title">${item.title}</h3>
-                                <p class="portfolio-desc">${item.description}</p>
-                                <div class="portfolio-tags">${tagsHTML}</div>
-                                <div class="portfolio-actions">
-                                    ${item.link ? `<a href="${item.link}" target="_blank" class="btn btn-primary">Visit Website</a>` : ''}
-                                    ${item.images ? `<button class="btn btn-secondary view-gallery-btn" data-index="${index}">View Gallery</button>` : ''}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                portfolioContainer.appendChild(portfolioElement);
-            });
-            
-            // Add event listeners for gallery buttons
-            document.querySelectorAll('.view-gallery-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const index = parseInt(button.getAttribute('data-index'));
-                    const item = portfolioData[index];
-                    openLightbox(0, item.images, item.title, item.description, item.link);
-                });
-            });
-        }
-
-        // Initialize portfolio filtering
-        function initPortfolioFilter() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const portfolioItems = document.querySelectorAll('.portfolio-item');
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Update active button
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    
-                    const filter = button.getAttribute('data-filter');
-                    
-                    // Show/hide portfolio items based on filter
-                    portfolioItems.forEach(item => {
-                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                            item.style.display = 'block';
-                            setTimeout(() => {
-                                item.style.opacity = '1';
-                                item.style.transform = 'translateY(0)';
-                            }, 10);
-                        } else {
-                            item.style.opacity = '0';
-                            item.style.transform = 'translateY(20px)';
-                            setTimeout(() => {
-                                item.style.display = 'none';
-                            }, 300);
-                        }
-                    });
-                });
-            });
-        }
-
-        // Initialize navigation
-        function initNavigation() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            
-            // Smooth scrolling for navigation links
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    const targetId = link.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    
-                    if (targetSection) {
-                        window.scrollTo({
-                            top: targetSection.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                        
-                        // Update active link
-                        navLinks.forEach(l => l.classList.remove('active'));
-                        link.classList.add('active');
-                        
-                        // Close mobile menu if open
-                        if (navMenu.classList.contains('active')) {
-                            navMenu.classList.remove('active');
-                        }
-                    }
-                });
-            });
-            
-            // Mobile menu toggle
-            if (menuToggle) {
-                menuToggle.addEventListener('click', () => {
-                    navMenu.classList.toggle('active');
-                });
-            }
-            
-            // Update active link on scroll
-            window.addEventListener('scroll', () => {
-                const sections = document.querySelectorAll('section');
-                const scrollPos = window.scrollY + 100;
-                
-                sections.forEach(section => {
-                    if (scrollPos > section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
-                        const id = section.getAttribute('id');
-                        const correspondingLink = document.querySelector(`.nav-link[href="#${id}"]`);
-                        
-                        if (correspondingLink) {
-                            navLinks.forEach(link => link.classList.remove('active'));
-                            correspondingLink.classList.add('active');
-                        }
-                    }
-                });
-            });
-        }
-
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set current year in footer
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-            
-            // Initialize theme
-            initTheme();
-            
-            // Add event listener to theme toggle
-            themeToggle.addEventListener('click', toggleTheme);
-            
-            // Initialize Three.js background
-            initThreeBackground();
-            
-            // Populate dynamic content
-            populateSkills();
-            populatePortfolio();
-            
-            // Initialize interactive features
-            initPortfolioFilter();
-            initNavigation();
-            
-            // Lightbox event listeners
-            document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-            document.querySelector('.lightbox-next').addEventListener('click', nextImage);
-            document.querySelector('.lightbox-prev').addEventListener('click', prevImage);
-            
-            // Close lightbox when clicking outside
-            document.getElementById('lightbox').addEventListener('click', (e) => {
-                if (e.target.id === 'lightbox') {
-                    closeLightbox();
-                }
-            });
-            
-            // Keyboard navigation for lightbox
-            document.addEventListener('keydown', (e) => {
-                const lightbox = document.getElementById('lightbox');
-                if (lightbox.classList.contains('active')) {
-                    if (e.key === 'Escape') {
-                        closeLightbox();
-                    } else if (e.key === 'ArrowRight') {
-                        nextImage();
-                    } else if (e.key === 'ArrowLeft') {
-                        prevImage();
-                    }
-                }
-            });
-            
-            // Add hover effects to portfolio items
-            document.querySelectorAll('.portfolio-card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-            
-            // Animate elements on scroll
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -100px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                    }
-                });
-            }, observerOptions);
-            
-            // Observe elements to animate
-            document.querySelectorAll('.skill-item, .portfolio-item, .detail-card').forEach(el => {
-                observer.observe(el);
-            });
-        });
-    </script>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #4361ee;
-            --secondary-color: #3a0ca3;
-            --accent-color: #f72585;
-            --light-color: #f8f9fa;
-            --dark-color: #212529;
-            --gray-color: #6c757d;
-            --light-gray: #e9ecef;
-            --transition: all 0.3s ease;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --border-radius: 10px;
-        }
-
-        /* Dark mode variables */
-        .dark-mode {
-            --primary-color: #4cc9f0;
-            --secondary-color: #3a0ca3;
-            --accent-color: #f72585;
-            --light-color: #121212;
-            --dark-color: #f8f9fa;
-            --gray-color: #adb5bd;
-            --light-gray: #2d2d2d;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--dark-color);
-            background-color: var(--light-color);
-            overflow-x: hidden;
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .section {
-            padding: 100px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .section-line {
-            width: 80px;
-            height: 2px;
-            background: var(--primary-color);
-            margin: 20px auto;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .btn-primary {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: white;
-            box-shadow: var(--shadow);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.3);
-        }
-
-        .dark-mode .btn-primary:hover {
-            box-shadow: 0 15px 30px rgba(76, 201, 240, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 20px 0;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            transition: background-color 0.3s ease;
-        }
-
-        .dark-mode .navbar {
-            background-color: rgba(18, 18, 18, 0.95);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.8rem;
-            font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .logo-text {
-            color: var(--dark-color);
-            transition: color 0.3s ease;
-        }
-
-        .logo-dot {
-            color: var(--primary-color);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-link {
-            font-weight: 500;
-            position: relative;
-            padding: 5px 0;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            bottom: 0;
-            left: 0;
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        .nav-link.active {
-            color: var(--primary-color);
-        }
-
-        .nav-controls {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            border-radius: 50px;
-            background: var(--light-gray);
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .theme-toggle i {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.9rem;
-            color: var(--dark-color);
-            transition: var(--transition);
-            z-index: 1;
-        }
-
-        .theme-toggle .fa-moon {
-            left: 8px;
-            opacity: 0;
-        }
-
-        .theme-toggle .fa-sun {
-            right: 8px;
-            opacity: 1;
-        }
-
-        .theme-toggle.dark .fa-moon {
-            opacity: 1;
-        }
-
-        .theme-toggle.dark .fa-sun {
-            opacity: 0;
-        }
-
-        .theme-toggle-slider {
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            transition: transform 0.3s ease;
-        }
-
-        .theme-toggle.dark .theme-toggle-slider {
-            transform: translateX(30px);
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--dark-color);
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding: 100px 20px 50px;
-            overflow: hidden;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        #three-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.5;
-        }
-
-        .hero-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            gap: 40px;
-        }
-
-        .hero-text {
-            flex: 1;
-            z-index: 2;
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-        }
-
-        .title-line {
-            display: block;
-            font-weight: 400;
-            color: var(--gray-color);
-        }
-
-        .title-name {
-            display: block;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 800;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            display: inline-block;
-            position: relative;
-        }
-
-        .subtitle-underline {
-            position: absolute;
-            width: 100%;
-            height: 8px;
-            background-color: rgba(67, 97, 238, 0.2);
-            bottom: 5px;
-            left: 0;
-            z-index: -1;
-        }
-
-        .dark-mode .subtitle-underline {
-            background-color: rgba(76, 201, 240, 0.2);
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            color: var(--gray-color);
-            max-width: 600px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2;
-        }
-
-        .image-container {
-            position: relative;
-            width: 350px;
-            height: 350px;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            animation: morphing 15s infinite ease-in-out;
-        }
-
-        @keyframes morphing {
-            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
-            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
-            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
-            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-        }
-
-        .profile-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .image-frame {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 5px solid transparent;
-            border-radius: inherit;
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask-composite: exclude;
-        }
-
-        .image-glow {
-            position: absolute;
-            width: 120%;
-            height: 120%;
-            top: -10%;
-            left: -10%;
-            background: radial-gradient(circle, rgba(67, 97, 238, 0.2) 0%, transparent 70%);
-            z-index: -1;
-            animation: pulse 4s infinite ease-in-out;
-        }
-
-        .dark-mode .image-glow {
-            background: radial-gradient(circle, rgba(76, 201, 240, 0.2) 0%, transparent 70%);
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.05); }
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 2;
-        }
-
-        .scroll-text {
-            font-size: 0.9rem;
-            color: var(--gray-color);
-            margin-bottom: 10px;
-        }
-
-        .scroll-line {
-            width: 1px;
-            height: 50px;
-            background: linear-gradient(to bottom, var(--primary-color), transparent);
-            animation: scrollLine 2s infinite ease-in-out;
-        }
-
-        @keyframes scrollLine {
-            0%, 100% { height: 50px; opacity: 1; }
-            50% { height: 70px; opacity: 0.5; }
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 50px;
-            align-items: start;
-        }
-
-        .about-text p {
-            margin-bottom: 20px;
-            color: var(--gray-color);
-        }
-
-        .about-intro {
-            font-size: 1.2rem;
-            color: var(--dark-color) !important;
-            font-weight: 500;
-        }
-
-        .about-outro {
-            font-weight: 500;
-            color: var(--dark-color) !important;
-        }
-
-        .about-details {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .detail-card {
-            background: var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .detail-card.animate {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.5s ease;
-        }
-
-        .detail-card:nth-child(1) { transition-delay: 0.1s; }
-        .detail-card:nth-child(2) { transition-delay: 0.2s; }
-        .detail-card:nth-child(3) { transition-delay: 0.3s; }
-        .detail-card:nth-child(4) { transition-delay: 0.4s; }
-        .detail-card:nth-child(5) { transition-delay: 0.5s; }
-
-        .detail-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .dark-mode .detail-card:hover {
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .detail-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .detail-content h3 {
-            font-size: 0.9rem;
-            color: var(--gray-color);
-            margin-bottom: 5px;
-        }
-
-        .detail-content p {
-            font-weight: 600;
-            color: var(--dark-color);
-        }
-
-        /* Skills Section - Custom Icons */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 30px;
-        }
-
-        .skill-item {
-            background: var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 30px 20px;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(20px);
-            text-align: center;
-        }
-
-        .skill-item.animate {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.5s ease;
-        }
-
-        .skill-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .dark-mode .skill-item:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .skill-logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            background: white;
-            padding: 15px;
-        }
-
-        .dark-mode .skill-logo {
-            background: #2d2d2d;
-        }
-
-        .skill-icon-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-            transition: var(--transition);
-        }
-
-        .skill-item:hover .skill-logo {
-            transform: scale(1.1) rotate(5deg);
-            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
-        }
-
-        .skill-item:hover .skill-icon-img {
-            filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.2)) brightness(1.1);
-        }
-
-        .skill-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--dark-color);
-            margin: 0;
-        }
-
-        /* Portfolio Section - Updated */
-        .portfolio-filter {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 8px 20px;
-            background: transparent;
-            border: 2px solid var(--light-gray);
-            border-radius: 50px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--dark-color);
-        }
-
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .portfolio-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .portfolio-item {
-            transition: all 0.5s ease;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .portfolio-item.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .portfolio-card {
-            background: var(--light-gray);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            height: 100%;
-        }
-
-        .portfolio-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .dark-mode .portfolio-card:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .portfolio-image {
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .gallery-indicator {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            z-index: 2;
-        }
-
-        .portfolio-number {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 2rem;
-            font-weight: 800;
-            color: rgba(255, 255, 255, 0.2);
-            z-index: 1;
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            opacity: 0;
-            transition: var(--transition);
-            color: white;
-            text-align: center;
-        }
-
-        .portfolio-card:hover .portfolio-overlay {
-            opacity: 1;
-        }
-
-        .portfolio-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .portfolio-desc {
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            opacity: 0.9;
-            max-height: 60px;
-            overflow: hidden;
-        }
-
-        .portfolio-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-
-        .portfolio-tag {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-
-        .portfolio-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .portfolio-actions .btn {
-            padding: 8px 20px;
-            font-size: 0.9rem;
-        }
-
-        /* Lightbox Styles */
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-
-        .lightbox.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .lightbox-content {
-            position: relative;
-            width: 90%;
-            max-width: 1200px;
-            height: 90vh;
-            background: var(--light-color);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            display: flex;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 10;
-            transition: var(--transition);
-        }
-
-        .lightbox-close:hover {
-            background: rgba(0, 0, 0, 0.8);
-            transform: scale(1.1);
-        }
-
-        .lightbox-prev,
-        .lightbox-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 10;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lightbox-prev:hover,
-        .lightbox-next:hover {
-            background: rgba(0, 0, 0, 0.8);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .lightbox-prev {
-            left: 20px;
-        }
-
-        .lightbox-next {
-            right: 20px;
-        }
-
-        .lightbox-image-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            overflow: hidden;
-        }
-
-        #lightbox-image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 5px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .lightbox-info {
-            width: 300px;
-            padding: 40px;
-            background: var(--light-gray);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .lightbox-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--dark-color);
-        }
-
-        .lightbox-info p {
-            margin-bottom: 25px;
-            color: var(--gray-color);
-        }
-
-        /* Contact Section */
-        .contact-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 50px;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        .contact-details h3 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            color: var(--dark-color);
-        }
-
-        .contact-details p {
-            color: var(--gray-color);
-        }
-
-        .contact-message {
-            background: var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            box-shadow: var(--shadow);
-        }
-
-        .contact-message h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--dark-color);
-        }
-
-        .contact-message p {
-            margin-bottom: 25px;
-            color: var(--gray-color);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark-color);
-            color: white;
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .dark-mode .footer {
-            background: #000000;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer .logo {
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .footer .logo-text {
-            color: white;
-        }
-
-        .footer-text {
-            margin-bottom: 30px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            background: var(--primary-color);
-            transform: translateY(-5px);
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 1200px) {
-            .lightbox-content {
-                flex-direction: column;
-                height: auto;
-                max-height: 90vh;
-            }
-            
-            .lightbox-image-container {
-                height: 60vh;
-            }
-            
-            .lightbox-info {
-                width: 100%;
-                padding: 20px;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-buttons {
-                justify-content: center;
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .skills-container {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
-            
-            .portfolio-actions {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background: var(--light-color);
-                flex-direction: column;
-                align-items: center;
-                padding: 20px 0;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: var(--transition);
-            }
-            
-            .dark-mode .nav-menu {
-                background: var(--light-gray);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            }
-            
-            .nav-menu.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            .hero-title {
-                font-size: 2.8rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.3rem;
-            }
-            
-            .portfolio-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .section {
-                padding: 80px 20px;
-            }
-            
-            .skills-container {
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-                gap: 20px;
-            }
-            
-            .skill-logo {
-                width: 70px;
-                height: 70px;
-                padding: 12px;
-            }
-            
-            .skill-name {
-                font-size: 1rem;
-            }
-            
-            .lightbox-image-container {
-                padding: 20px;
-            }
-            
-            .lightbox-prev,
-            .lightbox-next {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero-title {
-                font-size: 2.3rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .image-container {
-                width: 280px;
-                height: 280px;
-            }
-            
-            .skills-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .nav-controls {
-                gap: 15px;
-            }
-            
-            .theme-toggle {
-                width: 50px;
-                height: 25px;
-            }
-            
-            .theme-toggle.dark .theme-toggle-slider {
-                transform: translateX(25px);
-            }
-            
-            .theme-toggle-slider {
-                width: 21px;
-                height: 21px;
-            }
-            
-            .skill-logo {
-                width: 60px;
-                height: 60px;
-                padding: 10px;
-            }
-            
-            .portfolio-actions .btn {
-                width: 100%;
-            }
-            
-            .lightbox-content {
-                width: 95%;
-                height: 95vh;
-            }
-            
-            .lightbox-info h3 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    <div class="hero-art" data-hx="1">
+      <div class="arch" id="arch">
+        <div class="ring"></div>
+        <img class="ph" src="https://argieseowebsolutions.neocities.org/assets/img/profilecoding.gif" alt="Argie Anecito">
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue" data-hx="0">Scroll<span></span></div>
+</section>
+</div>
+
+<!-- ABOUT -->
+<div id="aboutLayer" class="layer edged">
+<section id="about" class="section">
+  <div class="sec-head">
+    <span class="ghost" data-speed="-0.18" aria-hidden="true">About</span>
+    <span class="eyebrow" data-fx="l">Chapter I</span>
+    <h2 class="sec-title" data-fx="r">About Me</h2>
+    <div class="orn" data-fx="u">✦</div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p class="lead" data-fx="l">Hey there! Welcome to my portfolio! I'm Argie Anecito, your go-to person for all things web development and SEO, with a special knack for crafting exceptional user interfaces and experiences.</p>
+      <p data-fx="l">I absolutely love blending innovative ideas with practical, functional solutions, always prioritizing what makes a website truly great for its users. My journey has been fueled by constant curiosity and a commitment to excellence, and I've had the pleasure of collaborating with diverse clients across various industries, sharpening my skills and expanding my expertise along the way.</p>
+      <p data-fx="l">So, when you dive into my portfolio, you're going to see exactly how I bring web development to life. We're talking everything from sleek UI designs to powerful web applications, and guess what? I make sure to integrate effective SEO optimization into every single one. My passion is all about crafting intuitive digital experiences that don't just look amazing, but actually work hard online to connect with your audience.</p>
+      <p data-fx="l" style="color:var(--silver)">Thanks for dropping by; I'm genuinely super excited about the possibility of collaborating with you on your next project!</p>
+    </div>
+    <div class="about-cards">
+      <div class="detail" data-fx="r"><i class="fas fa-user"></i><div><h4>Age</h4><p>25</p></div></div>
+      <div class="detail" data-fx="r"><i class="fas fa-map-marker-alt"></i><div><h4>Address</h4><p>San Jacinto, Pangasinan, Philippines</p></div></div>
+      <div class="detail" data-fx="r"><i class="fas fa-graduation-cap"></i><div><h4>Degree</h4><p>BS in Information Technology</p></div></div>
+      <div class="detail" data-fx="r"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>argie.anecitomih@gmail.com</p></div></div>
+      <div class="detail" data-fx="r"><i class="fas fa-briefcase"></i><div><h4>Expertise</h4><p>SEO & Web Development</p></div></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="band edged" aria-hidden="true"><div class="band-track" data-words="SEO|Web Development|UI/UX Design|Graphic Design|Shopify" data-dx="0.55"></div></div>
+
+<!-- SKILLS: one by one -->
+<section id="skills" class="pin ov edged">
+  <div class="stage" id="skillStage">
+    <div class="stage-title">
+      <span class="eyebrow">Chapter II</span>
+      <h2 class="sec-title">My Skills</h2>
+    </div>
+    <div class="ticks"></div>
+    <div class="slides"></div>
+    <div class="stage-ui"><div class="counter"></div><div class="bar"><i></i></div></div>
+  </div>
+</section>
+
+<!-- PROJECTS: one by one -->
+<section id="portfolio" class="pin ov edged">
+  <div class="stage" id="projectStage">
+    <div class="stage-title">
+      <span class="eyebrow">Chapter III</span>
+      <h2 class="sec-title">My Portfolio</h2>
+    </div>
+    <div class="pj-filter">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="shopify">Shopify</button>
+      <button class="chip" data-filter="graphics">Graphics</button>
+      <button class="chip" data-filter="web">Web</button>
+      <button class="chip" data-filter="personal">Personal Projects</button>
+    </div>
+    <div class="ticks"></div>
+    <div class="slides"></div>
+    <div class="stage-ui"><div class="counter"></div><div class="bar"><i></i></div></div>
+  </div>
+</section>
+
+<div class="band edged pull" aria-hidden="true"><div class="band-track" data-words="Let's Work Together|Available for Freelance|Say Hello" data-dx="-0.55"></div></div>
+
+<!-- CONTACT -->
+<div id="contactLayer" class="layer edged">
+<section id="contact" class="section">
+  <div class="sec-head">
+    <span class="ghost" data-speed="-0.18" aria-hidden="true">Hello</span>
+    <span class="eyebrow" data-fx="r">Chapter IV</span>
+    <h2 class="sec-title" data-fx="l">Get In Touch</h2>
+    <div class="orn" data-fx="u">✦</div>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <div class="c-item" data-fx="l"><div class="c-ico"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><p>argie.anecitomih@gmail.com</p></div></div>
+      <div class="c-item" data-fx="l"><div class="c-ico"><i class="fas fa-map-marker-alt"></i></div><div><h4>Location</h4><p>San Jacinto, Pangasinan, Philippines</p></div></div>
+      <div class="c-item" data-fx="l"><div class="c-ico"><i class="fas fa-briefcase"></i></div><div><h4>Services</h4><p>Web Development, SEO, UI/UX Design</p></div></div>
+    </div>
+    <div class="c-card" data-fx="r">
+      <h3>Let's Work Together!</h3>
+      <p>I'm currently available for freelance work and exciting projects. If you have a website that needs building or improving, let's connect!</p>
+      <a href="mailto:argie.anecitomih@gmail.com" class="btn gold">Send Me an Email</a>
+    </div>
+  </div>
+</section>
+</div>
+</main>
+
+<footer class="footer">
+  <div class="logo"><span>ARGIE</span><span class="logo-dot">.</span></div>
+  <p>© <span id="current-year">2024</span> Argie Anecito. All Rights Reserved.</p>
+</footer>
+
+<!-- Live preview modal -->
+<div id="embedModal" class="embed-modal" role="dialog" aria-modal="true" aria-label="Live preview">
+  <div class="embed-window">
+    <div class="embed-bar">
+      <div class="embed-url"><i class="fas fa-lock"></i> <span id="embedUrlText"></span></div>
+      <div class="embed-actions">
+        <button class="embed-device active" data-device="desktop" aria-label="Desktop view"><i class="fas fa-desktop"></i></button>
+        <button class="embed-device" data-device="mobile" aria-label="Mobile view"><i class="fas fa-mobile-screen-button"></i></button>
+        <a id="embedOpen" href="#" target="_blank" rel="noopener" aria-label="Open in new tab"><i class="fas fa-arrow-up-right-from-square"></i></a>
+        <button id="embedClose" aria-label="Close">&times;</button>
+      </div>
+    </div>
+    <div class="embed-stage">
+      <div class="embed-loader" id="embedLoader"><div class="spin"></div></div>
+      <div class="embed-frame-wrap" id="embedFrameWrap"><iframe id="embedFrame" title="Live preview" src="about:blank" allow="fullscreen; clipboard-write"></iframe></div>
+    </div>
+    <p class="embed-fallback">Not loading? <a id="embedFallbackLink" href="#" target="_blank" rel="noopener">Open it in a new tab</a></p>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+  <div class="lb-box">
+    <button class="round lb-close">&times;</button>
+    <button class="round lb-prev"><i class="fas fa-chevron-left"></i></button>
+    <div class="lb-img"><img id="lb-image" src="" alt=""></div>
+    <div class="lb-info">
+      <h3 id="lb-title"></h3>
+      <p id="lb-desc"></p>
+      <a id="lb-link" href="#" target="_blank" rel="noopener" class="btn gold">Visit Website</a>
+    </div>
+    <button class="round lb-next"><i class="fas fa-chevron-right"></i></button>
+  </div>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const skillsData=[
+ {name:"Ahrefs",icon:"https://th.bing.com/th/id/ODLS.7dfe86f6-e566-40c5-ae89-4a806289584c?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2",category:"seo"},
+ {name:"Schema Markup",icon:"https://app.schemaapp.com/assets/img/SA_Logo_Main_Orange.svg",category:"seo"},
+ {name:"Menterprise",icon:"https://cdn.prod.website-files.com/6642c1627c905dd1bde41d10/6699b1ce40b5b435be486fc0_square_256.png",category:"seo"},
+ {name:"Google Search Console",icon:"https://cdn.simpleicons.org/googlesearchconsole/458CF5",category:"seo"},
+ {name:"HTML5",icon:"https://cdn.worldvectorlogo.com/logos/html-1.svg",category:"dev"},
+ {name:"CSS3",icon:"https://cdn.worldvectorlogo.com/logos/css-3.svg",category:"dev"},
+ {name:"JavaScript",icon:"https://www.svgrepo.com/show/303206/javascript-logo.svg",category:"dev"},
+ {name:"React JS",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",category:"dev"},
+ {name:"PHP",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",category:"dev"},
+ {name:"SQL",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",category:"dev"},
+ {name:"Shopify",icon:"https://www.svgrepo.com/show/475678/shopify-color.svg",category:"cms"},
+ {name:"WordPress",icon:"https://www.svgrepo.com/show/501062/wordpress.svg",category:"cms"},
+ {name:"Photoshop",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-original.svg",category:"design"},
+ {name:"Figma",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",category:"design"}
+];
+const catLabel={seo:"Search Craft",dev:"Engineering",cms:"Platforms",design:"Artistry"};
+
+const portfolioData=[
+ {title:"Airwheel Philippines",category:"shopify",description:"E-commerce website for Airwheel electric vehicles in the Philippines",link:"https://airwheel.ph/",tags:["Shopify","E-commerce","Electric Vehicles"],thumbnail:"https://argieseowebsolutions.neocities.org/graphics/website/airwheel.png"},
+ {title:"Coalax Philippines",category:"shopify",description:"Coalax brand e-commerce website for Travel Bags products",link:"https://coalax.ph/",tags:["Shopify","E-commerce","Health & Wellness"],thumbnail:"https://argieseowebsolutions.neocities.org/graphics/website/coalax.png"},
+ {title:"Alpha Lifestyle",category:"shopify",description:"Premium lifestyle brand e-commerce store with diverse product range",link:"https://www.alphalifestyle.ph/",tags:["Shopify","E-commerce","Lifestyle Brand"],thumbnail:"https://argieseowebsolutions.neocities.org/graphics/website/alphalifestyle.png"},
+ {title:"Coalax Brochure",category:"graphics",description:"Front and back design for Coalax brand brochure",images:["https://argieseowebsolutions.neocities.org/graphics/1%20Front.png","https://argieseowebsolutions.neocities.org/graphics/2%20Back.png"],tags:["Brochure","Print Design","Brand Identity"]},
+ {title:"Alpha Lifestyle Brochure",category:"graphics",description:"Front and back design for Alpha Lifestyle brand brochure",images:["https://argieseowebsolutions.neocities.org/graphics/alpha%20front.png","https://argieseowebsolutions.neocities.org/graphics/alpha%20back.png"],tags:["Brochure","Print Design","Brand Identity"]},
+ {title:"Alpha Lifestyle Business Card",category:"graphics",description:"Professional business card design with mockup presentation",images:["https://argieseowebsolutions.neocities.org/graphics/Alpha%20LifeStyle%20Business%20Card%20Final%20Mockup.jpg"],tags:["Business Card","Print Design","Mockup"]},
+ {title:"Klaviyo Design",category:"graphics",description:"Email marketing design for Klaviyo platform",images:["https://argieseowebsolutions.neocities.org/graphics/klaviyo.jpg"],tags:["Email Design","Marketing","Klaviyo"]},
+ {title:"Voucher Designs",category:"graphics",description:"Front and back designs for promotional vouchers",images:["https://argieseowebsolutions.neocities.org/graphics/vouchers/Back.jpg","https://argieseowebsolutions.neocities.org/graphics/vouchers/FRONT%2010%20_-2.jpg"],tags:["Voucher","Promotional","Print Design"]},
+ {title:"Social Media Posts",category:"graphics",description:"Various social media posting designs for multiple brands",images:["https://argieseowebsolutions.neocities.org/graphics/posting/hypershell%20posting.png","https://argieseowebsolutions.neocities.org/graphics/posting/Posting%20(2).png","https://argieseowebsolutions.neocities.org/graphics/posting/Posting%20Coalax.png","https://argieseowebsolutions.neocities.org/graphics/posting/Posting.png","https://argieseowebsolutions.neocities.org/graphics/posting/posting2.jpg","https://argieseowebsolutions.neocities.org/graphics/posting/posting3.jpg","https://argieseowebsolutions.neocities.org/graphics/posting/reso1.png"],tags:["Social Media","Digital Marketing","Content Creation"]},
+ {title:"SE3SX Company Profile",category:"graphics",description:"Company profile design for SE3SX brand",images:["https://argieseowebsolutions.neocities.org/graphics/posting/se3sx%20company%20profile.png"],tags:["Company Profile","Brand Identity","Corporate Design"]},
+ {title:"2025 Lexus RZ SUV Landing Page",category:"web",description:"Landing page for Lexus of Edison showcasing the 2025 Lexus RZ electric SUV",link:"https://www.lexusofedison.com/-2025-lexus-rz-suv-lexus-of-edison-in-nj.html",tags:["Landing Page","SEO","UI/UX Design"],thumbnail:"https://argieseowebsolutions.neocities.org/assets/img/landing%20page%20Lexus%20of%20Edison.png"},
+ {title:"OSCA Malasiqui Online Application",category:"web",description:"Online application system for the Office of the Senior Citizen Affairs in Malasiqui",link:"https://www.oscamalasiquionlineapplication.site/index.php",tags:["Web Application","Government","Database Management"],thumbnail:"https://argieseowebsolutions.neocities.org/assets/img/OSCA.png"},
+ {title:"Crafty Management System",category:"web",description:"Web-based management system for craft businesses with inventory and order management",images:["https://argieseowebsolutions.neocities.org/assets/img/crafty.png"],tags:["Web Application","Management System","Inventory"],thumbnail:"https://argieseowebsolutions.neocities.org/assets/img/crafty.png"},
+ {title:"Crafty Mobile App",category:"web",description:"Mobile application for Crafty Management System with login, cart, checkout, and chat features",images:["https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/1.png","https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/2.png","https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/3.png","https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/4.png","https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/5.png","https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/6.png","https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/6-2.png","https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/7.png"],tags:["Mobile App","E-commerce","React Native"],thumbnail:"https://argieseowebsolutions.neocities.org/assets/img/masonry-portfolio/1.png"},
+ {title:"Gallery Blog Portfolio",category:"web",description:"Personal portfolio and gallery blog website design",link:"https://mianicoleroldan.github.io/portfolio_mia/",tags:["Portfolio","Gallery","Blog"],thumbnail:"https://anecitoargie.github.io/Portfolio_Argie/static/media/port1.0e1587230ffffeb8da2c.png"},
+ {title:"Tambayan",category:"personal",description:"Tambayan, your digital hangout: a Filipino-inspired, AI-powered platform for gathering, sharing, chatting, and building communities",link:"https://tambayan-sand.vercel.app/",embed:"https://tambayan-sand.vercel.app/",tags:["Personal Project","Social Platform","AI-Powered"]}
+];
+const catName={shopify:"Shopify",graphics:"Graphics",web:"Web",personal:"Personal Project"};
+
+/* ============ HELPERS ============ */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const pad=n=>String(n).padStart(2,'0');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ============ PINNED ONE-BY-ONE STAGES ============ */
+const pins=[];
+function createPin(sectionId,stageId){
+  const section=document.getElementById(sectionId),stage=document.getElementById(stageId);
+  const pin={section,stage,slidesEl:stage.querySelector('.slides'),ticksEl:stage.querySelector('.ticks'),
+    counter:stage.querySelector('.counter'),fill:stage.querySelector('.bar i'),slides:[],n:0,cur:-1};
+  pins.push(pin);return pin;
+}
+function setSlides(pin,html,count){
+  pin.slidesEl.innerHTML=html;
+  pin.slides=[...pin.slidesEl.children];
+  pin.n=count;pin.cur=-1;
+  pin.section.style.setProperty('--n',Math.max(count,1));
+  pin.ticksEl.innerHTML=pin.slides.map((_,i)=>`<button aria-label="Go to ${i+1}" data-i="${i}"></button>`).join('');
+  pin.ticks=[...pin.ticksEl.children];
+}
+function pinProgress(pin){
+  const r=pin.section.getBoundingClientRect(),total=r.height-innerHeight*(pin.ov?2.4:1);
+  return total>0?clamp(-r.top/total):0;
+}
+function pinUpdate(pin){
+  if(!pin.n)return;
+  const p=pinProgress(pin),idx=pin.n>1?Math.round(p*(pin.n-1)):0;
+  pin.fill.style.transform=`scaleX(${p.toFixed(3)})`;
+  if(idx===pin.cur)return;
+  pin.cur=idx;
+  pin.slides.forEach((s,i)=>s.classList.toggle('is-active',i===idx));
+  pin.ticks.forEach((t,i)=>t.classList.toggle('on',i===idx));
+  pin.counter.innerHTML=`<b>${pad(idx+1)}</b> / ${pad(pin.n)}`;
+  if(pin===projPin){const g=pin.slides[idx]&&pin.slides[idx].querySelector('[data-gallery]');if(g)portfolioData[+g.dataset.gallery].images.forEach(preload)}
+}
+function pinGoto(pin,i){
+  const top=pin.section.getBoundingClientRect().top+scrollY,total=pin.section.offsetHeight-innerHeight*(pin.ov?2.4:1);
+  scrollTo({top:top+(pin.n>1?i/(pin.n-1):0)*total+1,behavior:'smooth'});
+}
+
+/* Skills */
+const skillPin=createPin('skills','skillStage');skillPin.ov=true;
+function buildSkills(){
+  const html=skillsData.map((s,i)=>{
+    const rev=i%2===1,a=rev?'r':'l',b=rev?'l':'r';
+    return `<div class="slide${rev?' rev':''}"><div class="slide-in">
+      <span class="slide-no" aria-hidden="true">${pad(i+1)}</span>
+      <div class="sk-text slide-a" data-side="${a}">
+        <span class="eyebrow">${catLabel[s.category]} · No. ${pad(i+1)}</span>
+        <h3 class="sk-name">${s.name}</h3><span class="sk-rule"></span>
+      </div>
+      <div class="sk-icon" data-side="${b}"><div class="medal"><img src="${s.icon}" alt="${s.name}"></div></div>
+    </div></div>`;
+  }).join('');
+  setSlides(skillPin,html,skillsData.length);
+}
+
+/* Projects */
+const projPin=createPin('portfolio','projectStage');projPin.ov=true;
+function buildProjects(filter='all'){
+  const items=portfolioData.map((it,i)=>({...it,i})).filter(it=>filter==='all'||it.category===filter);
+  const html=items.map((it,k)=>{
+    const rev=k%2===1,a=rev?'r':'l',b=rev?'l':'r';
+    const thumb=it.thumbnail||(it.images&&it.images[0])||'';
+    const badge=it.embed?'<i class="fas fa-play"></i> Live preview':(it.images&&it.images.length>1?`${it.images.length} images`:'');
+    const frame=(it.embed&&!it.thumbnail)
+      ?`<div class="pj-frame embed-bg" data-open="${it.i}">${it.title}${badge?`<span class="pj-badge">${badge}</span>`:''}</div>`
+      :`<div class="pj-frame" data-open="${it.i}" style="background-image:url('${thumb}')">${badge?`<span class="pj-badge">${badge}</span>`:''}</div>`;
+    return `<div class="slide${rev?' rev':''}"><div class="slide-in">
+      <span class="slide-no" aria-hidden="true">${pad(k+1)}</span>
+      <div class="pj-media slide-a" data-side="${a}">${frame}</div>
+      <div class="pj-info" data-side="${b}">
+        <span class="eyebrow">${catName[it.category]||''} · No. ${pad(k+1)}</span>
+        <h3 class="pj-title">${it.title}</h3>
+        <p class="pj-desc">${it.description}</p>
+        <div class="pj-tags">${it.tags.map(t=>`<span>${t}</span>`).join('')}</div>
+        <div class="pj-actions">
+          ${it.embed?`<button class="btn gold" data-embed="${it.i}">View Live</button>`:''}
+          ${it.link?`<a href="${it.link}" target="_blank" rel="noopener" class="btn${it.embed?'':' gold'}">Visit Website</a>`:''}
+          ${it.images?`<button class="btn" data-gallery="${it.i}">View Gallery</button>`:''}
+        </div>
+      </div>
+    </div></div>`;
+  }).join('');
+  setSlides(projPin,html,items.length);
+}
+
+/* ============ LIGHTBOX / EMBED ============ */
+let gi=0,gImgs=[];
+function openLightbox(item){
+  gImgs=item.images;gi=0;gImgs.forEach(preload);showImg();
+  $('#lb-title').textContent=item.title;$('#lb-desc').textContent=item.description;
+  const l=$('#lb-link');if(item.link){l.href=item.link;l.style.display='inline-flex'}else l.style.display='none';
+  const multi=gImgs.length>1;$('.lb-prev').style.display=$('.lb-next').style.display=multi?'flex':'none';
+  $('#lightbox').classList.add('active');document.body.style.overflow='hidden';
+}
+function closeLightbox(){$('#lightbox').classList.remove('active');document.body.style.overflow=''}
+const imgCache={};
+function preload(u){if(!imgCache[u]){const i=new Image();i.decoding='async';i.src=u;imgCache[u]=i}return imgCache[u]}
+function showImg(){
+  const el=$('#lb-image'),u=gImgs[gi],im=preload(u);
+  const done=()=>{if(gImgs[gi]===u){el.src=u;el.style.opacity=1}};
+  if(im.complete&&im.naturalWidth)done();
+  else{el.style.opacity=.3;im.addEventListener('load',done,{once:true})}
+  preload(gImgs[(gi+1)%gImgs.length]);preload(gImgs[(gi-1+gImgs.length)%gImgs.length]);
+}
+const stepImg=d=>{gi=(gi+d+gImgs.length)%gImgs.length;showImg()};
+
+function setEmbedDevice(m){$('#embedFrameWrap').classList.toggle('mobile',m==='mobile');$$('.embed-device').forEach(b=>b.classList.toggle('active',b.dataset.device===m))}
+function openEmbed(item){
+  const frame=$('#embedFrame'),loader=$('#embedLoader');
+  $('#embedUrlText').textContent=new URL(item.embed).hostname;
+  $('#embedOpen').href=item.embed;$('#embedFallbackLink').href=item.embed;
+  frame.title=item.title;setEmbedDevice('desktop');
+  loader.classList.remove('hidden');frame.onload=()=>loader.classList.add('hidden');frame.src=item.embed;
+  $('#embedModal').classList.add('active');document.body.style.overflow='hidden';
+}
+function closeEmbed(){
+  const m=$('#embedModal'),f=$('#embedFrame');
+  m.classList.remove('active');document.body.style.overflow='';
+  setTimeout(()=>{if(!m.classList.contains('active')){f.onload=null;f.src='about:blank'}},350);
+}
+function openItem(i){
+  const it=portfolioData[i];
+  if(it.embed)openEmbed(it);else if(it.images)openLightbox(it);else if(it.link)window.open(it.link,'_blank','noopener');
+}
+
+/* ============ DUST CANVAS ============ */
+function initDust(){
+  const c=$('#dust'),ctx=c.getContext('2d');let w,h,pts=[];
+  function size(){w=c.width=innerWidth;h=c.height=innerHeight;pts=Array.from({length:innerWidth<768?35:70},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.6+.3,s:Math.random()*.25+.05,d:Math.random()*.6+.2,a:Math.random()*.5+.15}))}
+  size();addEventListener('resize',size);
+  if(reduce){pts.forEach(p=>{ctx.fillStyle=`rgba(207,213,222,${p.a})`;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.3);ctx.fill()});return}
+  (function loop(){
+    ctx.clearRect(0,0,w,h);
+    pts.forEach(p=>{
+      p.y-=p.s;p.x+=Math.sin((p.y+p.d*400)/80)*.15;
+      if(p.y<-5){p.y=h+5;p.x=Math.random()*w}
+      const y=(p.y-scrollY*p.d*.15)%h,yy=y<0?y+h:y;
+      ctx.fillStyle=`rgba(207,213,222,${p.a})`;ctx.beginPath();ctx.arc(p.x,yy,p.r,0,6.3);ctx.fill();
+    });
+    requestAnimationFrame(loop);
+  })();
+}
+
+/* ============ INK-SPLASH PROFILE BLOB ============ */
+function initBlob(){
+  const W=600,H=800,N=8,TAU=Math.PI*2,R=Math.random,rx=W*.385,ry=H*.395;
+  const wv=[[2,.035,1],[3,.03,-1],[5,.022,2],[7,.015,-2],[11,.01,3]].map(([k,a,m])=>({k,a,m,ph:R()*TAU}));
+  const sp=Array.from({length:14},()=>({a:R()*TAU,h:.05+R()*.1,w:.05+R()*.08,ph:R()*TAU}));
+  const dr=Array.from({length:34},()=>({a:R()*TAU,d:1.06+R()*R()*.26,r:2+R()*R()*9,ph:R()*TAU}));
+  const k=(th,f,amp)=>{
+    const t=f/N*TAU;let v=1;
+    for(const w of wv)v+=w.a*Math.sin(w.k*th+w.ph+w.m*t);
+    for(const s of sp){const d=Math.abs(Math.atan2(Math.sin(th-s.a),Math.cos(th-s.a)));
+      v+=amp*s.h*(.65+.35*Math.sin(t+s.ph))*Math.exp(-(d*d)/(s.w*s.w))}
+    return v;
+  };
+  const pt=(th,f,sc,amp)=>{const q=k(th,f,amp)*sc;return[W/2+rx*Math.cos(th)*q,H/2+ry*Math.sin(th)*q]};
+  const path=(x,f,sc,amp)=>{x.beginPath();for(let i=0;i<=360;i++){const[px,py]=pt(i/360*TAU,f,sc,amp);i?x.lineTo(px,py):x.moveTo(px,py)}x.closePath()};
+  const drops=(x,f,list,extra)=>{
+    const t=f/N*TAU;
+    list.forEach(d=>{const[px,py]=pt(d.a,f,d.d+extra+.02*Math.sin(t+d.ph),0);x.beginPath();x.arc(px,py,d.r,0,TAU);x.fill()});
+  };
+  function sprite(ring){
+    const c=document.createElement('canvas');c.width=W;c.height=H*N;const x=c.getContext('2d');
+    x.fillStyle=x.strokeStyle='#000';x.lineJoin='round';
+    for(let f=0;f<N;f++){
+      x.save();x.translate(0,f*H);x.beginPath();x.rect(0,0,W,H);x.clip();
+      if(ring){
+        x.lineWidth=5;path(x,f,1.07,1.6);x.stroke();
+        drops(x,f,dr.slice(0,20),.03);
+      }else{
+        path(x,f,1,1);x.fill();
+        drops(x,f,dr,0);
+        x.globalCompositeOperation='destination-out';
+        for(let i=0;i<22;i++){const[px,py]=pt(R()*TAU,f,.9+R()*.08,0);x.beginPath();x.arc(px,py,.8+R()*3,0,TAU);x.fill()}
+      }
+      x.restore();
+    }
+    return `url(${c.toDataURL()})`;
+  }
+  const root=document.documentElement;
+  root.style.setProperty('--blobfill',sprite(false));
+  root.style.setProperty('--blobring',sprite(true));
+  if(reduce)return;
+  const arch=$('#arch');let f=0,last=0;
+  (function loop(ts){
+    if(ts-last>110){last=ts;f=(f+1)%N;arch.style.setProperty('--pp',(f/(N-1)*100)+'%')}
+    requestAnimationFrame(loop);
+  })(0);
+}
+
+/* ============ CRUMBLY EDGE (mask strip) + DEBRIS ============ */
+let lastSy=0,fi=0,ft=0,dctx,dw,dh,debrisOn=false,edgeEls=[];const parts=[];
+function makeEdge(){
+  // organic ink-splash edge: wavy body + tendrils + flying droplets + small holes, 8 looping frames
+  const W=1200,H=220,N=8,P=6,S=H+P,TAU=6.2832,R=Math.random,c=document.createElement('canvas');c.width=W;c.height=S*N;
+  const x=c.getContext('2d');
+  const waves=[[1,.07,1],[2,.05,-1],[3,.04,2],[5,.03,1],[8,.02,-2],[13,.014,2],[21,.01,-3],[34,.007,3],[55,.005,-2]]
+    .map(([k,a,m])=>({k,a:a*H,m,ph:R()*TAU}));
+  const spikes=Array.from({length:16},()=>({x:R()*W,h:H*(.12+R()*.2),w:5+R()*12,ph:R()*TAU}));
+  const edge=(px,f)=>{
+    const t=f/N*TAU;let y=H*.6;
+    for(const w of waves)y+=w.a*Math.sin(w.k*px/W*TAU+w.ph+w.m*t);
+    for(const s of spikes){let d=Math.abs(px-s.x);d=Math.min(d,W-d);y-=s.h*(.65+.35*Math.sin(t+s.ph))*Math.exp(-(d*d)/(s.w*s.w))}
+    return y;
+  };
+  x.fillStyle='#000';
+  for(let f=0;f<N;f++){
+    const oy=f*S+P;
+    x.globalCompositeOperation='source-over';
+    x.beginPath();x.moveTo(0,oy+H+2);
+    for(let px=0;px<=W;px+=2)x.lineTo(px,oy+edge(px%W,f));
+    x.lineTo(W,oy+H+2);x.closePath();x.fill();
+    for(let i=0;i<46;i++){const px=R()*W,r=.8+R()*R()*5,y=Math.max(edge(px,f)-R()*R()*H*.45-4,r+1);x.beginPath();x.arc(px,oy+y,r,0,TAU);x.fill()}
+    x.globalCompositeOperation='destination-out';
+    for(let i=0;i<30;i++){const px=R()*W,r=.8+R()*3,y=edge(px,f)+4+R()*R()*H*.22;x.beginPath();x.arc(px,oy+y,r,0,TAU);x.fill()}
+  }
+  document.documentElement.style.setProperty('--edge',`url(${c.toDataURL()})`);
+  document.documentElement.classList.add('edges');
+}
+function fitAbout(){const l=$('#aboutLayer');l.style.top=Math.min(0,innerHeight-$('#about').offsetHeight)+'px'}
+function initEdges(){
+  makeEdge();edgeEls=$$('.edged');
+  dctx=$('#debris').getContext('2d');debrisSize();addEventListener('resize',debrisSize);
+}
+function debrisSize(){const c=$('#debris');dw=c.width=innerWidth;dh=c.height=innerHeight}
+function spawnDebris(n,dir,y0){
+  for(let i=0;i<n&&parts.length<260;i++){
+    parts.push({x:Math.random()*dw,y:y0-Math.random()*150,vx:(Math.random()-.4)*2.2,vy:-dir*Math.random()*1.4,
+      s:Math.random()*3+.8,r:Math.random()*6,vr:(Math.random()-.5)*.2,l:1,dl:Math.random()*.014+.008,
+      col:Math.random()<.15?'232,199,125':'228,233,241'});
+  }
+  if(!debrisOn){debrisOn=true;requestAnimationFrame(debrisLoop)}
+}
+function debrisLoop(){
+  dctx.clearRect(0,0,dw,dh);
+  for(let i=parts.length-1;i>=0;i--){
+    const p=parts[i];p.x+=p.vx;p.y+=p.vy;p.vy+=.035;p.vx*=.995;p.r+=p.vr;p.l-=p.dl;
+    if(p.l<=0){parts.splice(i,1);continue}
+    dctx.save();dctx.translate(p.x,p.y);dctx.rotate(p.r);
+    dctx.fillStyle=`rgba(${p.col},${(p.l*.8).toFixed(2)})`;dctx.fillRect(-p.s,-p.s*.6,p.s*2,p.s*1.2);dctx.restore();
+  }
+  if(parts.length)requestAnimationFrame(debrisLoop);else{debrisOn=false;dctx.clearRect(0,0,dw,dh)}
+}
+
+/* ============ SCROLL ENGINE ============ */
+let fxEls=[],spEls=[],hxEls=[],bands=[],ticking=false;
+function collect(){
+  fxEls=$$('[data-fx]');
+  spEls=$$('[data-speed]').map(el=>({el,s:parseFloat(el.dataset.speed)||0}));
+  hxEls=$$('[data-hx]').map(el=>({el,d:parseFloat(el.dataset.hx)}));
+  bands=$$('.band-track').map(el=>({el,dx:parseFloat(el.dataset.dx)||0,box:el.parentElement}));
+}
+function frame(){
+  ticking=false;
+  const vh=innerHeight,sy=scrollY,max=document.documentElement.scrollHeight-vh;
+  $('#scrollProgress').style.transform=`scaleX(${max>0?clamp(sy/max):0})`;
+
+  // text flying in from the sides
+  fxEls.forEach(el=>{
+    if(reduce){el.style.opacity=1;return}
+    const r=el.getBoundingClientRect();
+    const p=clamp((vh*.95-r.top)/(vh*.42)),e=1-Math.pow(1-p,3),t=el.dataset.fx;
+    const x=t==='l'?-(1-e)*180:t==='r'?(1-e)*180:0,y=t==='u'?(1-e)*60:0;
+    el.style.translate=`${x.toFixed(1)}px ${y.toFixed(1)}px`;el.style.opacity=e.toFixed(3);
+  });
+
+  // hero text exits to the sides as you scroll away
+  if(!reduce&&sy<vh*2){
+    const desktop=innerWidth>992,p=desktop?clamp((sy-vh*.3)/(vh*.55)):0;
+    hxEls.forEach(({el,d})=>{el.style.translate=`${(d*p*240).toFixed(1)}px 0`;el.style.opacity=(1-p).toFixed(3)});
+  }
+
+  // vertical parallax layers
+  if(!reduce)spEls.forEach(({el,s})=>{
+    const r=el.parentElement.getBoundingClientRect();
+    if(r.bottom<-300||r.top>vh+300)return;
+    const d=r.top+r.height/2-vh/2;el.style.translate=`0 ${(-d*s).toFixed(1)}px`;
+  });
+
+  // marquee bands
+  if(!reduce)bands.forEach(({el,dx,box})=>{
+    const r=box.getBoundingClientRect();
+    if(r.bottom<0||r.top>vh)return;
+    el.style.translate=`${((r.top+r.height/2-vh/2)*dx*-1).toFixed(1)}px 0`;
+  });
+
+  // crumbly edge: slides with scroll, throws debris where a section is eating the previous one
+  if(!reduce){
+    const dy=sy-lastSy;lastSy=sy;
+    const root=document.documentElement;
+    if(dy){
+      root.classList.add('scrolled');
+      root.style.setProperty('--mx',((sy*.35)%1200).toFixed(1)+'px');
+      const now=performance.now();
+      if(now-ft>70){ft=now;fi=(fi+1)%8;root.style.setProperty('--my',(-(fi*226+6))+'px')} // crumbs flicker while scrolling
+    }
+    if(dy)edgeEls.forEach(el=>{
+      const t=el.getBoundingClientRect().top;
+      if(t>-40&&t<vh)spawnDebris(Math.min(6,Math.ceil(Math.abs(dy)/14)),Math.sign(dy),t);
+    });
+  }
+
+  pins.forEach(pinUpdate);
+
+  // active nav
+  let cur='home';
+  ['home','about','skills','portfolio','contact'].forEach(id=>{
+    if(document.getElementById(id).getBoundingClientRect().top<=vh*.5)cur=id;
+  });
+  if(innerHeight+sy>=document.documentElement.scrollHeight-4)cur='contact';
+  $$('.nav-link').forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));
+  $$('.side-dots a').forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));
+}
+function request(){if(!ticking){ticking=true;requestAnimationFrame(frame)}}
+
+/* ============ SMOOTH WHEEL SCROLL (inertia) ============ */
+function initSmooth(){
+  if(reduce||matchMedia('(pointer:coarse)').matches)return;
+  let target=scrollY,cur=scrollY,anim=false;
+  const max=()=>document.documentElement.scrollHeight-innerHeight;
+  function step(){
+    cur+=(target-cur)*.085;
+    if(Math.abs(target-cur)<.4){cur=target;anim=false}
+    scrollTo(0,cur);
+    if(anim)requestAnimationFrame(step);
+  }
+  addEventListener('wheel',e=>{
+    if(e.ctrlKey||$('#lightbox').classList.contains('active')||$('#embedModal').classList.contains('active'))return;
+    e.preventDefault();
+    if(!anim){target=cur=scrollY}
+    target=clamp(target+(e.deltaMode===1?e.deltaY*32:e.deltaY),0,max());
+    if(!anim){anim=true;requestAnimationFrame(step)}
+  },{passive:false});
+  addEventListener('scroll',()=>{if(!anim)target=cur=scrollY},{passive:true});
+}
+
+/* ============ INIT ============ */
+document.addEventListener('DOMContentLoaded',()=>{
+  $('#current-year').textContent=new Date().getFullYear();
+
+  // marquee text
+  $$('.band-track').forEach(t=>{
+    const g=(t.dataset.words||'').split('|').filter(Boolean).map((w,i)=>`<span class="bw${i%2?' alt':''}">${w}</span><span class="bd">✦</span>`).join('');
+    t.innerHTML=g.repeat(3);
+  });
+
+  initDust();initBlob();
+  buildSkills();buildProjects('all');
+  collect();
+  fitAbout();addEventListener('resize',fitAbout);addEventListener('load',fitAbout);
+  if(!reduce)initEdges();
+
+  // nav + dots smooth scroll
+  $$('.nav-link,.side-dots a,.hero-btns a').forEach(a=>a.addEventListener('click',e=>{
+    const id=a.getAttribute('href');if(!id||id[0]!=='#')return;
+    e.preventDefault();const t=$(id);
+    scrollTo({top:id==='#home'?0:t.getBoundingClientRect().top+scrollY-(id==='#skills'||id==='#portfolio'?0:70),behavior:'smooth'});
+    $('.nav-menu').classList.remove('active');
+  }));
+  $('.menu-toggle').addEventListener('click',()=>$('.nav-menu').classList.toggle('active'));
+
+  // ticks jump
+  pins.forEach(p=>p.ticksEl.addEventListener('click',e=>{const b=e.target.closest('button');if(b)pinGoto(p,+b.dataset.i)}));
+
+  // project filter: rebuild one-by-one slides
+  $$('.chip').forEach(c=>c.addEventListener('click',()=>{
+    $$('.chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');
+    buildProjects(c.dataset.filter);
+    const top=projPin.section.getBoundingClientRect().top+scrollY;
+    if(scrollY>top)scrollTo({top:top+1,behavior:'auto'});
+    request();
+  }));
+
+  // project buttons
+  $('#projectStage').addEventListener('click',e=>{
+    const g=e.target.closest('[data-gallery]'),m=e.target.closest('[data-embed]'),f=e.target.closest('[data-open]');
+    if(g)openLightbox(portfolioData[+g.dataset.gallery]);
+    else if(m)openEmbed(portfolioData[+m.dataset.embed]);
+    else if(f)openItem(+f.dataset.open);
+  });
+
+  // lightbox
+  $('.lb-close').addEventListener('click',closeLightbox);
+  $('.lb-next').addEventListener('click',()=>stepImg(1));
+  $('.lb-prev').addEventListener('click',()=>stepImg(-1));
+  $('#lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLightbox()});
+  // embed
+  $('#embedClose').addEventListener('click',closeEmbed);
+  $('#embedModal').addEventListener('click',e=>{if(e.target.id==='embedModal')closeEmbed()});
+  $$('.embed-device').forEach(b=>b.addEventListener('click',()=>setEmbedDevice(b.dataset.device)));
+  document.addEventListener('keydown',e=>{
+    if($('#embedModal').classList.contains('active')&&e.key==='Escape')closeEmbed();
+    if($('#lightbox').classList.contains('active')){
+      if(e.key==='Escape')closeLightbox();else if(e.key==='ArrowRight')stepImg(1);else if(e.key==='ArrowLeft')stepImg(-1);
+    }
+  });
+
+  initSmooth();
+  addEventListener('scroll',request,{passive:true});
+  addEventListener('resize',request);
+  addEventListener('load',request);
+  frame();
+});
+</script>
 </body>
 </html>
