@@ -103,7 +103,7 @@ html.edges.scrolled .edged::before,html.edges.scrolled .edged::after{display:blo
 .arch{position:relative;width:min(520px,84vw,calc((100vh - 170px)*.75));aspect-ratio:3/4;--pp:0%}
 .arch .ph,.arch .ring{position:absolute;inset:0;width:100%;height:100%;
   -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-  -webkit-mask-size:100% 800%;mask-size:100% 800%;
+  -webkit-mask-size:100% calc(var(--bn,8)*100%);mask-size:100% calc(var(--bn,8)*100%);
   -webkit-mask-position:0 var(--pp);mask-position:0 var(--pp)}
 .arch .ph{object-fit:cover;filter:grayscale(.25) contrast(1.05);
   -webkit-mask-image:var(--blobfill);mask-image:var(--blobfill)}
@@ -231,6 +231,14 @@ html.edges.scrolled .edged::before,html.edges.scrolled .edged::after{display:blo
 @keyframes sp{to{transform:rotate(360deg)}}
 .embed-fallback{padding:8px;text-align:center;font-size:.95rem;color:var(--silver-d);border-top:1px solid var(--line)}
 .embed-fallback a{color:var(--gold);text-decoration:underline}
+
+/* lite mode (phones/tablets): cheaper rendering to stop scroll lag */
+html.lite .fog{filter:none}
+html.lite .slide{filter:none!important}
+html.lite .debris{display:none}
+html.lite [data-fx]{will-change:auto}
+html.lite .arch .ring{filter:none}
+html.lite .vignette{display:none}
 
 /* responsive */
 @media(max-width:992px){
@@ -493,6 +501,8 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
 const pad=n=>String(n).padStart(2,'0');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const lite=matchMedia('(pointer:coarse)').matches||innerWidth<993;
+document.documentElement.classList.toggle('lite',lite);
 
 /* ============ PINNED ONE-BY-ONE STAGES ============ */
 const pins=[];
@@ -620,7 +630,7 @@ function openItem(i){
 /* ============ DUST CANVAS ============ */
 function initDust(){
   const c=$('#dust'),ctx=c.getContext('2d');let w,h,pts=[];
-  function size(){w=c.width=innerWidth;h=c.height=innerHeight;pts=Array.from({length:innerWidth<768?35:70},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.6+.3,s:Math.random()*.25+.05,d:Math.random()*.6+.2,a:Math.random()*.5+.15}))}
+  function size(){w=c.width=innerWidth;h=c.height=innerHeight;pts=Array.from({length:lite?16:70},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.6+.3,s:Math.random()*.25+.05,d:Math.random()*.6+.2,a:Math.random()*.5+.15}))}
   size();addEventListener('resize',size);
   if(reduce){pts.forEach(p=>{ctx.fillStyle=`rgba(207,213,222,${p.a})`;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.3);ctx.fill()});return}
   (function loop(){
@@ -637,7 +647,7 @@ function initDust(){
 
 /* ============ INK-SPLASH PROFILE BLOB ============ */
 function initBlob(){
-  const W=600,H=800,N=8,TAU=Math.PI*2,R=Math.random,rx=W*.385,ry=H*.395;
+  const W=600,H=800,N=lite?1:8,TAU=Math.PI*2,R=Math.random,rx=W*.385,ry=H*.395;
   const wv=[[2,.035,1],[3,.03,-1],[5,.022,2],[7,.015,-2],[11,.01,3]].map(([k,a,m])=>({k,a,m,ph:R()*TAU}));
   const sp=Array.from({length:14},()=>({a:R()*TAU,h:.05+R()*.1,w:.05+R()*.08,ph:R()*TAU}));
   const dr=Array.from({length:34},()=>({a:R()*TAU,d:1.06+R()*R()*.26,r:2+R()*R()*9,ph:R()*TAU}));
@@ -675,7 +685,8 @@ function initBlob(){
   const root=document.documentElement;
   root.style.setProperty('--blobfill',sprite(false));
   root.style.setProperty('--blobring',sprite(true));
-  if(reduce)return;
+  root.style.setProperty('--bn',N);
+  if(reduce||lite)return;
   const arch=$('#arch');let f=0,last=0;
   (function loop(ts){
     if(ts-last>110){last=ts;f=(f+1)%N;arch.style.setProperty('--pp',(f/(N-1)*100)+'%')}
@@ -766,7 +777,7 @@ function frame(){
   }
 
   // vertical parallax layers
-  if(!reduce)spEls.forEach(({el,s})=>{
+  if(!reduce&&!lite)spEls.forEach(({el,s})=>{
     const r=el.parentElement.getBoundingClientRect();
     if(r.bottom<-300||r.top>vh+300)return;
     const d=r.top+r.height/2-vh/2;el.style.translate=`0 ${(-d*s).toFixed(1)}px`;
@@ -780,7 +791,7 @@ function frame(){
   });
 
   // crumbly edge: slides with scroll, throws debris where a section is eating the previous one
-  if(!reduce){
+  if(!reduce&&!lite){
     const dy=sy-lastSy;lastSy=sy;
     const root=document.documentElement;
     if(dy){
@@ -843,7 +854,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   buildSkills();buildProjects('all');
   collect();
   fitAbout();addEventListener('resize',fitAbout);addEventListener('load',fitAbout);
-  if(!reduce)initEdges();
+  if(!reduce&&!lite)initEdges();
 
   // nav + dots smooth scroll
   $$('.nav-link,.side-dots a,.hero-btns a').forEach(a=>a.addEventListener('click',e=>{
